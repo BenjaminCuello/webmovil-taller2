@@ -1,101 +1,145 @@
-﻿# Taller 1 - Introducción al Desarrollo Web Móvil
+# Taller 2 - Introducción al Desarrollo Web Móvil  
 
-## Grupo 1 - Equipo: SmartCoders
+---
+
+## Grupo 1 — Equipo: SmartCoders
 
 ### Integrantes
+- Bastian Salinas — 21.848.994-K  
+- Benjamín Cuello — 21.682.135-1  
+- Benjamín Salas — 21.758.667-4  
+- Tomás Guerra — 21.664.344-5  
 
-- Bastian Salinas, 21.848.994-K
-- Benjamín Cuello, 21.682.135-1
-- Benjamín Salas, 21.758.667-4
-- Tomás Guerra, 21.664.344-5
+---
 
-## Descripción
+##  Descripción General
 
-InfoMóvil es una aplicación web móvil responsiva que centraliza información dinámica de interés mediante el consumo de 4 APIs públicas. La aplicación permite a los usuarios explorar datos de Pokémon, países, clima y feriados de manera rápida y clara sin necesidad de recargar la página.
+InfoMóvil ahora integra un ecosistema con **3 servicios backend propios** y un **frontend móvil empaquetado como aplicación Android (APK)** usando **Apache Cordova**.  
 
-**Características principales:**
+La app mantiene las mismas funcionalidades del Taller 1 (Pokémon, países, clima y feriados), pero ahora **todos los datos provienen de nuestras propias APIs y bases de datos**.
 
-- Diseño Mobile First completamente responsivo
-- Consumo de 4 APIs públicas diferentes
-- Navegación dinámica sin recargar la página
-- Filtrado y búsqueda de datos
-- Manejo de errores y estados de carga
-- Integración con Tailwind CSS
-- Código JavaScript modularizado
+---
 
-### Recursos Disponibles
+##  Objetivos del Proyecto
+- Desarrollar **3 APIs independientes**, cada una en una tecnología distinta.  
+- Crear un **frontend móvil responsivo** que consuma dichas APIs.  
+- **Empaquetar la app como APK Android** funcional.  
+- Mantener el mismo diseño, navegación y estructura modular del Taller 1.  
 
-#### 1. Pokémon
+---
 
-- **API:** [PokéAPI](https://pokeapi.co/)
-- **Funcionalidad:** Búsqueda por nombre o ID
-- **Datos mostrados:** Imagen, tipos, estadísticas, altura, peso
-
-#### 2. Países
-
-- **API:** [REST Countries](https://restcountries.com/)
-- **Funcionalidad:** Búsqueda por nombre de país
-- **Datos mostrados:** Bandera, región, capital, población, código ISO
-
-#### 3. Clima
-
-- **API:** [Open-Meteo](https://open-meteo.com/en/docs)
-- **Funcionalidad:** Consulta por ciudad con geocoding
-- **Datos mostrados:** Temperatura actual, velocidad del viento, coordenadas
-
-#### 4. Feriados
-
-- **API:** [Nager.Date](https://date.nager.at/Api)
-- **Funcionalidad:** Consulta por código de país y año
-- **Datos mostrados:** Lista completa de feriados oficiales
-
-## Tecnologías Utilizadas
-
-- **HTML5** - Estructura semántica y accesible
-- **CSS3** - Estilos personalizados y media queries puras
-- **Tailwind CSS** - Framework de utilidades CSS
-- **JavaScript ES6+** - Lógica de aplicación y consumo de APIs
-- **Fetch API** - Comunicación con APIs externas
-- **CSS Grid & Flexbox** - Layout responsivo
-
-## Estructura del Proyecto
-
+## 🧩 Arquitectura del Sistema
+```text
+┌────────────────────────┐
+│ Frontend (Cordova App) │  ← HTML + JS + Tailwind
+└───────────┬────────────┘
+            │
+   ┌────────┼─────────┐
+   │        │         │
+┌───────┐ ┌───────┐ ┌──────────┐
+│NestJS │ │Express│ │ FastAPI  │
+│/pokemon││/countries││/weather+holidays│
+└───────┘ └───────┘ └──────────┘
+   │         │         │
+ PostgreSQL  PostgreSQL MongoDB
 ```
-webmovil-taller1-main/
-├── index.html       # Página principal y vista de detalle
-├── styles.css       # Estilos personalizados y media queries
-├── README.md        # Documentación del proyecto
-└── js/              # Código JavaScript modularizado
-    ├── main.js      # Router y controlador principal
-    ├── utils.js     # Funciones utilitarias
-    ├── api.js       # Funciones de consumo de APIs
-    ├── ui.js        # Manejo de interfaz de usuario
-    ├── pokemon.js   # Lógica específica de Pokémon
-    ├── countries.js # Lógica específica de países
-    ├── weather.js   # Lógica específica de clima
-    └── holidays.js  # Lógica específica de feriados
+
+---
+
+## APIs a usar: 
+
+### API 1 — Pokémon (NestJS + PostgreSQL)
+- **Endpoints**
+  - `GET /pokemon?limit&offset` → lista de pokemones  
+  - `GET /pokemon/:nombreOId` → detalle de un pokemon  
+- **Datos almacenados:** id, nombre, sprites, tipos, altura, peso, estadísticas.  
+- **Puerto:** `http://localhost:3000`  
+
+---
+
+### API 2 — Países (Express + PostgreSQL)
+- **Endpoints**
+  - `GET /countries` → lista de todos los países  
+  - `GET /countries/search?name=Chile` → búsqueda por nombre  
+- **Datos:** nombre común, oficial, bandera, región, capital, población, código ISO.  
+- **Puerto:** `http://localhost:4000`  
+
+---
+
+###  API 3 — Clima y Feriados (FastAPI + MongoDB)
+- **Endpoints**
+  - `GET /weather?city=La%20Serena` → devuelve temperatura y viento actuales  
+  - `GET /holidays/{countryCode}/{year}` → devuelve feriados del país y año indicado  
+- **Datos:**  
+  - Clima → nombre, latitud, longitud, temperatura, viento.  
+  - Feriados → fecha, nombre local y nombre oficial.  
+- **Puerto:** `http://localhost:8000`  
+
+---
+
+##  Frontend (Cordova + HTML + JS + Tailwind)
+- Mantiene el mismo diseño y estructura del Taller 1.  
+- Adaptado para consumir nuestras 3 APIs locales.  
+- **Archivo `config.js`:** define las URLs base:
+  ```js
+  const BASE_URL_POKEMON = 'http://localhost:3000'
+  const BASE_URL_COUNTRIES = 'http://localhost:4000'
+  const BASE_URL_FASTAPI = 'http://localhost:8000'
+  ```
+- **Empaquetado con Cordova:**
+  ```bash
+  cordova platform add android
+  cordova build android
+  ```
+- El **APK final** queda en:
+  ```
+  platforms/android/app/build/outputs/apk/debug/
+  ```
+
+---
+
+## Tecnologías a utilizar: 
+
+### Frontend
+- HTML5  
+- CSS3 + Tailwind CSS (CDN)  
+- JavaScript ES6  
+- Apache Cordova
+
+### Backend
+- NestJS (TypeScript) + PostgreSQL  
+- Express (Node.js) + PostgreSQL  
+- FastAPI (Python) + MongoDB
+
+---
+
+##  Estructura del Repositorio de momento
+```text
+infomovil-taller2/
+├── frontend/
+│   ├── www/
+│   │   ├── index.html
+│   │   ├── styles.css
+│   │   ├── js/
+│   │   │   ├── main.js
+│   │   │   ├── api.js
+│   │   │   ├── config.js
+│   │   │   ├── pokemon.js
+│   │   │   ├── countries.js
+│   │   │   ├── weather.js
+│   │   │   └── holidays.js
+│   └── README.md
+│
+├── api-pokemon/      # Backend NestJS
+├── api-countries/    # Backend Express
+├── api-fastapi/      # Backend FastAPI
+└── README.md         # Este documento
 ```
-## Consumo de APIs
-
-- 4 APIs públicas integradas
-- Manejo de errores y estados de carga
-- Validación de datos de entrada
-
-## Experiencia de Usuario
-
-- Navegación fluida sin recargas
-- Feedback visual consistente
-- Accesibilidad básica (ARIA labels, semántica HTML)
-
+---
 ## Organización
 
-División de tareas y organización:
-[Documento de Google Sheets](https://docs.google.com/spreadsheets/d/1Ytlmfwt0y6sD7nvuvEeluyWZASoxuv80GKblEttJDdw/edit?usp=sharing)
+División de tareas y organización:  https://docs.google.com/spreadsheets/d/1SS0sQna__lw2i_N7hFHYkcZuJKCjdoBD3aPRTeOkSSM/edit?gid=0#gid=0 
 
-## Cómo Ejecutar el Proyecto
-
-- **Opción 1:** Abrir `index.html` directamente en el navegador
-- **Opción 2:** Usar la extensión **Live Server** en VS Code
 
 <img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/0925bbb5-e158-4a53-a7a7-44f48cb05083" />
 
