@@ -5,7 +5,7 @@ var todosLosPaises = []
 function cargarPaisesLanding() {
   var contenedor = document.getElementById('contenedor-paises')
   if (!contenedor) return
-  contenedor.innerHTML = '<p class="text-gray-400">Cargando...</p>'
+  mostrarEstadoCarga(contenedor, 'Cargando países destacados...')
   obtenerTodosPaises()
     .then(function (listaPaises) {
       listaPaises.sort(function (a, b) {
@@ -31,9 +31,10 @@ function cargarPaisesLanding() {
           '</span>'
         contenedor.appendChild(crearTarjetaPequena(html))
       }
+      marcarCargaCompleta(contenedor)
     })
     .catch(function () {
-      contenedor.innerHTML = '<p class="text-red-600">Error de red o API</p>'
+      mostrarError(contenedor, 'No se pudieron cargar los países destacados')
     })
 }
 
@@ -103,6 +104,7 @@ function buscarPais() {
         '</div>' +
         '</div>' +
         '</div>'
+      marcarCargaCompleta(contenedor)
     })
     .catch(function () {
       status.textContent = 'País no encontrado. Verifica el nombre e intenta nuevamente'
@@ -176,6 +178,7 @@ function cargarPaginaPaises(esNuevo) {
     )
     grid.appendChild(tarjeta)
   }
+  marcarCargaCompleta(contenedor)
   var botonCargar = document.getElementById('cargar-mas-paises')
   if (botonCargar) {
     botonCargar.onclick = function () {

@@ -30,31 +30,49 @@ var paginaActualClima = 0
 
 function cargarClimaLanding() {
   var contenedor = document.getElementById('contenedor-clima')
+  if (!contenedor) return
   var ciudades = ['Calama', 'Coquimbo', 'La Serena']
-  contenedor.innerHTML = '<p class="text-gray-400">Cargando...</p>'
-  contenedor.innerHTML = ''
-  for (var i = 0; i < ciudades.length; i++) {
-    var ciudad = ciudades[i]
-    obtenerClima(ciudad)
+  mostrarEstadoCarga(contenedor, 'Cargando clima...')
+  var promesas = ciudades.map(function (ciudad) {
+    return obtenerClima(ciudad)
       .then(function (datos) {
         var temperatura = Math.round(datos.clima.current.temperature_2m)
         var viento = datos.clima.current.wind_speed_10m.toFixed(1)
         var nombreCiudad = datos.coordenadas.name
-        var html =
-          '<span><strong>' +
-          nombreCiudad +
-          '</strong></span>' +
-          '<span class="text-xs text-gray-600">' +
-          temperatura +
-          '°C · ' +
-          viento +
-          ' m/s</span>'
-        contenedor.appendChild(crearTarjetaPequena(html))
+        return {
+          nombre: nombreCiudad,
+          texto:
+            '<span><strong>' +
+            nombreCiudad +
+            '</strong></span>' +
+            '<span class="text-xs text-gray-600">' +
+            temperatura +
+            '°C · ' +
+            viento +
+            ' m/s</span>',
+        }
       })
       .catch(function () {
-        mostrarError(contenedor, 'No se pudo cargar el clima')
+        return null
       })
-  }
+  })
+
+  Promise.all(promesas)
+    .then(function (resultados) {
+      contenedor.innerHTML = ''
+      var exitosos = resultados.filter(Boolean)
+      if (!exitosos.length) {
+        mostrarError(contenedor, 'No se pudo cargar el clima')
+        return
+      }
+      exitosos.forEach(function (item) {
+        contenedor.appendChild(crearTarjetaPequena(item.texto))
+      })
+      marcarCargaCompleta(contenedor)
+    })
+    .catch(function () {
+      mostrarError(contenedor, 'No se pudo cargar el clima')
+    })
 }
 
 function consultarClima() {
@@ -101,6 +119,7 @@ function consultarClima() {
         '</div>' +
         '</div>' +
         '</div>'
+      marcarCargaCompleta(contenedor)
     })
     .catch(function () {
       status.textContent = 'Ciudad no encontrada o error en la consulta'
@@ -207,6 +226,7 @@ function cargarCiudadesEnGrid(ciudades) {
               }
             }
           )
+          marcarCargaCompleta(document.getElementById('contenedor-detalle'))
         }
       })
       .catch(function () {
@@ -218,6 +238,8 @@ function cargarCiudadesEnGrid(ciudades) {
             'Cargando...',
             function () {}
           )
+          mostrarToast('error', 'No se pudo obtener el clima de algunas ciudades', 5000)
+          marcarCargaCompleta(document.getElementById('contenedor-detalle'))
         }
       })
   }

@@ -3,6 +3,30 @@
   line-height: 1.6;
 }
 
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  width: auto;
+  height: auto;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.75rem;
+  background: #1d4ed8;
+  color: #ffffff;
+  z-index: 50;
+  outline: none;
+  box-shadow: 0 10px 25px rgba(29, 78, 216, 0.3);
+}
+
 .tarjeta {
   background: #ffffff;
   border-radius: 12px;
@@ -85,6 +109,17 @@ input:focus {
 img {
   max-width: 100%;
   height: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 @media (max-width: 480px) {

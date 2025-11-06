@@ -1,0 +1,21 @@
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - nest
+      - express
+      - fastapi
+  nest:
+    build: ./backend/nest
+    ports:
+      - "3000:3000"
+  express:
+    build: ./backend/express
+    ports:
+      - "4000:4000"
+  fastapi:
+    build: ./backend/fastapi
+    ports:
+      - "8000:8000"

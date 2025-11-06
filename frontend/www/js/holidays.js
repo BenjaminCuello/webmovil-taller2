@@ -13,7 +13,7 @@ var paisesCargados = 0
 function cargarFeriadosLanding() {
   var contenedor = document.getElementById('contenedor-feriados')
   if (!contenedor) return
-  contenedor.innerHTML = '<p class="text-gray-400">Cargando...</p>'
+  mostrarEstadoCarga(contenedor, 'Cargando feriados...')
   var anoActual = new Date().getFullYear()
   obtenerFeriados('CL', anoActual)
     .then(function (listaFeriados) {
@@ -31,9 +31,10 @@ function cargarFeriadosLanding() {
           '</span>'
         contenedor.appendChild(crearTarjetaPequena(html))
       }
+      marcarCargaCompleta(contenedor)
     })
     .catch(function () {
-      contenedor.innerHTML = '<p class="text-red-600">Error de red o API</p>'
+      mostrarError(contenedor, 'No se pudieron cargar los feriados destacados')
     })
 }
 
@@ -106,6 +107,7 @@ function consultarFeriados() {
         listaFeriados +
         '</div>' +
         '</div>'
+      marcarCargaCompleta(contenedor)
     })
     .catch(function () {
       status.textContent = 'No se pudieron cargar los feriados. Verifica el código de país'
@@ -211,6 +213,7 @@ function cargarFeriadosPaises(paises) {
                   }
                 }
               )
+              marcarCargaCompleta(document.getElementById('contenedor-detalle'))
             }
           }
         })({ codigo: pais.codigo, nombre: pais.nombre })
@@ -224,6 +227,8 @@ function cargarFeriadosPaises(paises) {
             'Cargando...',
             function () {}
           )
+          mostrarToast('error', 'No se pudo obtener el detalle de algunos feriados', 5000)
+          marcarCargaCompleta(document.getElementById('contenedor-detalle'))
         }
       })
   }

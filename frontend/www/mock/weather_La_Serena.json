@@ -1,0 +1,15 @@
+{
+  "coordenadas": {
+    "name": "La Serena",
+    "country_code": "CL",
+    "latitude":  -29.90,
+    "longitude": -71.25
+  },
+  "clima": {
+    "current": {
+      "temperature_2m": 18.2,
+      "wind_speed_10m": 4.6
+    }
+  }
+}
+

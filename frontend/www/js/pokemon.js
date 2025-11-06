@@ -2,51 +2,50 @@ var offsetPokemon = 0
 
 function cargarPokemonLanding() {
   var contenedor = document.getElementById('contenedor-pokemon')
-  contenedor.innerHTML = '<p class="text-gray-400">Cargando...</p>'
+  mostrarEstadoCarga(contenedor, 'Cargando Pokémon destacados...')
 
   obtenerListaPokemon(6, 0)
     .then(function (listado) {
-      contenedor.innerHTML = ''
-
-      // Pedimos todos los detalles y luego los ordenamos por ID
       var promesas = listado.results.map(function (pokemon) {
         return obtenerPokemon(pokemon.name)
       })
 
       Promise.all(promesas)
         .then(function (detalles) {
-          detalles.sort(function (a, b) {
-            return a.id - b.id
-          })
-
-          detalles.forEach(function (datosPokemon) {
-            var sprite =
-              (datosPokemon.sprites && datosPokemon.sprites.front_default) ||
-              (datosPokemon.sprites && datosPokemon.sprites.back_default) ||
-              ''
-            var html =
-              '<div class="flex items-center gap-2">' +
-              '<img src="' +
-              sprite +
-              '" alt="' +
-              datosPokemon.name +
-              '" class="w-9 h-9" />' +
-              '<strong class="capitalize">' +
-              datosPokemon.name +
-              '</strong>' +
-              '</div>' +
-              '<span class="text-xs text-gray-600">#' +
-              datosPokemon.id +
-              '</span>'
-            contenedor.appendChild(crearTarjetaPequena(html))
-          })
+          contenedor.innerHTML = ''
+          detalles
+            .sort(function (a, b) {
+              return a.id - b.id
+            })
+            .forEach(function (datosPokemon) {
+              var sprite =
+                (datosPokemon.sprites && datosPokemon.sprites.front_default) ||
+                (datosPokemon.sprites && datosPokemon.sprites.back_default) ||
+                ''
+              var html =
+                '<div class="flex items-center gap-2">' +
+                '<img src="' +
+                sprite +
+                '" alt="' +
+                datosPokemon.name +
+                '" class="w-9 h-9" />' +
+                '<strong class="capitalize">' +
+                datosPokemon.name +
+                '</strong>' +
+                '</div>' +
+                '<span class="text-xs text-gray-600">#' +
+                datosPokemon.id +
+                '</span>'
+              contenedor.appendChild(crearTarjetaPequena(html))
+            })
+          marcarCargaCompleta(contenedor)
         })
         .catch(function () {
-          contenedor.innerHTML = '<p class="text-red-600">Error de red o API</p>'
+          mostrarError(contenedor, 'No se pudieron cargar los Pokémon destacados')
         })
     })
     .catch(function () {
-      contenedor.innerHTML = '<p class="text-red-600">Error de red o API</p>'
+      mostrarError(contenedor, 'No se pudieron cargar los Pokémon destacados')
     })
 }
 
@@ -136,6 +135,7 @@ function buscarPokemon() {
         '</div>' +
         '</div>' +
         '</div>'
+      marcarCargaCompleta(contenedor)
     })
     .catch(function () {
       status.textContent = 'Pokémon no encontrado. Intenta con otro nombre o ID'
@@ -227,6 +227,7 @@ function cargarPokemonGrid(esNuevo) {
               cargarPokemonGrid(false)
             }
           )
+          marcarCargaCompleta(contenedor)
         })
         .catch(function () {
           mostrarError(contenedor, 'Error al cargar los Pokémon')
