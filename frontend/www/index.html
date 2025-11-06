@@ -14,18 +14,78 @@
       content="SmartCoders - Benjamin Salas, Tomas Guerra, Bastian Salinas, Benjamin Cuello"
     />
     <link rel="stylesheet" href="styles.css" />
+    <script>
+      window.tailwind = window.tailwind || {}
+      window.tailwind.config = {
+        safelist: [
+          'bg-emerald-500/15',
+          'border-emerald-300/40',
+          'text-emerald-50',
+          'bg-amber-500/15',
+          'border-amber-300/40',
+          'text-amber-50',
+          'bg-slate-500/20',
+          'border-slate-300/40',
+          'text-slate-100',
+          'animate-spin',
+          'border-blue-200',
+          'border-t-blue-500',
+          'bg-rose-100',
+          'text-rose-600',
+          'border-rose-200',
+          'bg-rose-50',
+          'text-rose-700',
+          'bg-blue-50',
+          'text-blue-700',
+          'border-emerald-200',
+          'bg-emerald-50',
+          'text-emerald-700',
+          'border-white/60',
+        ],
+      }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
 
   <body class="min-h-screen bg-slate-100 text-slate-900">
+    <a href="#vista-landing" class="skip-link">Saltar al contenido principal</a>
     <header class="bg-blue-600 text-white">
       <div class="max-w-5xl mx-auto p-4 md:p-6">
-        <h1 class="text-2xl md:text-3xl font-bold">InfoMóvil</h1>
-        <p class="mt-2 text-sm md:text-base text-blue-100">
-          Explora datos de Pokémon, países, clima y feriados
-        </p>
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+          <div>
+            <h1 class="text-2xl md:text-3xl font-bold">InfoMóvil</h1>
+            <p class="mt-2 text-sm md:text-base text-blue-100">
+              Explora datos de Pokémon, países, clima y feriados
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span
+              id="mode-indicator"
+              class="inline-flex items-center justify-center rounded-full border border-white/30 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white"
+              aria-live="polite"
+            >
+              Modo: —
+            </span>
+            <label for="mode-select" class="sr-only">Seleccionar modo de datos</label>
+            <select
+              id="mode-select"
+              class="rounded-md border border-white/30 bg-white/20 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-white focus:border-white focus:outline-none focus:ring-2 focus:ring-white/60"
+            >
+              <option value="public">APIs públicas</option>
+              <option value="local">APIs locales</option>
+              <option value="mock">Datos mock</option>
+            </select>
+          </div>
+        </div>
       </div>
     </header>
+
+    <div
+      id="app-toast"
+      class="hidden mx-auto mt-2 w-[calc(100%-2rem)] max-w-3xl rounded-lg border border-transparent px-4 py-2 text-sm shadow transition-all"
+      role="status"
+      aria-live="polite"
+    ></div>
 
     <main id="vista-landing" class="max-w-5xl mx-auto p-4 md:p-6 space-y-6">
       <section class="bg-white shadow rounded-md p-4 md:p-6">
@@ -159,6 +219,7 @@
     </footer>
 
     <script src="js/utils.js"></script>
+    <script src="js/config.js"></script>
     <script src="js/api.js"></script>
     <script src="js/ui.js"></script>
     <script src="js/pokemon.js"></script>

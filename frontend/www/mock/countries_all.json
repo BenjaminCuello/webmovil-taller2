@@ -1,0 +1,83 @@
+[
+  {
+    "name": { "common": "Chile", "official": "República de Chile" },
+    "flags": { "png": "https://flagcdn.com/w320/cl.png" },
+    "region": "Americas",
+    "capital": ["Santiago"],
+    "population": 19116201,
+    "cca2": "CL"
+  },
+  {
+    "name": { "common": "Argentina", "official": "República Argentina" },
+    "flags": { "png": "https://flagcdn.com/w320/ar.png" },
+    "region": "Americas",
+    "capital": ["Buenos Aires"],
+    "population": 45376763,
+    "cca2": "AR"
+  },
+  {
+    "name": { "common": "Peru", "official": "República del Perú" },
+    "flags": { "png": "https://flagcdn.com/w320/pe.png" },
+    "region": "Americas",
+    "capital": ["Lima"],
+    "population": 32971846,
+    "cca2": "PE"
+  },
+  {
+    "name": { "common": "Bolivia", "official": "Estado Plurinacional de Bolivia" },
+    "flags": { "png": "https://flagcdn.com/w320/bo.png" },
+    "region": "Americas",
+    "capital": ["Sucre"],
+    "population": 11673029,
+    "cca2": "BO"
+  },
+  {
+    "name": { "common": "Ecuador", "official": "República del Ecuador" },
+    "flags": { "png": "https://flagcdn.com/w320/ec.png" },
+    "region": "Americas",
+    "capital": ["Quito"],
+    "population": 17643060,
+    "cca2": "EC"
+  },
+  {
+    "name": { "common": "Colombia", "official": "República de Colombia" },
+    "flags": { "png": "https://flagcdn.com/w320/co.png" },
+    "region": "Americas",
+    "capital": ["Bogotá"],
+    "population": 50882884,
+    "cca2": "CO"
+  },
+  {
+    "name": { "common": "Brazil", "official": "República Federativa do Brasil" },
+    "flags": { "png": "https://flagcdn.com/w320/br.png" },
+    "region": "Americas",
+    "capital": ["Brasília"],
+    "population": 212559409,
+    "cca2": "BR"
+  },
+  {
+    "name": { "common": "Uruguay", "official": "República Oriental del Uruguay" },
+    "flags": { "png": "https://flagcdn.com/w320/uy.png" },
+    "region": "Americas",
+    "capital": ["Montevideo"],
+    "population": 3473727,
+    "cca2": "UY"
+  },
+  {
+    "name": { "common": "United States", "official": "United States of America" },
+    "flags": { "png": "https://flagcdn.com/w320/us.png" },
+    "region": "Americas",
+    "capital": ["Washington, D.C."],
+    "population": 331002651,
+    "cca2": "US"
+  },
+  {
+    "name": { "common": "Spain", "official": "Reino de España" },
+    "flags": { "png": "https://flagcdn.com/w320/es.png" },
+    "region": "Europe",
+    "capital": ["Madrid"],
+    "population": 47351567,
+    "cca2": "ES"
+  }
+]
+
