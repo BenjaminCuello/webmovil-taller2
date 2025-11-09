@@ -2,5 +2,10 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-CMD ["sh", "-c", "echo 'NestJS API pendiente de implementación. Monte el código en /app y actualice este Dockerfile.'; tail -f /dev/null"]
+COPY api-pokemon/package*.json ./
+RUN npm install
+
+COPY api-pokemon/. ./
+
+CMD ["npm", "run", "start:dev"]
 
