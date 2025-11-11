@@ -7,13 +7,13 @@ from typing import List, Optional
 #1 Database setup
 app = FastAPI(
     title="API de clima y feriados ",
-    description="Bavkend FastApi de MongoDB",
+    description="Backend FastApi de MongoDB",
     version="1.0.0"
 )
 
 #Conecciom a la base de datos MongoDB
-CONNECTION_STRING = "mongodb+srv://<TU_USUARIO>:<TU_PASSWORD>@<TU_CLUSTER>.mongodb.net/?retryWrites=true&w=majority"
 
+CONNECTION_STRING = "mongodb+srv://webmovil:taller123@cluster0.quu5kix.mongodb.net/?appName=Cluster0"
 #Conectar el Cliente de MongoDB
 client = MongoClient(CONNECTION_STRING)
 db = client["infomovil"]
@@ -35,7 +35,7 @@ class Feriado(BaseModel):
 
 class HolidaysResponse(BaseModel):
     pais: str
-    anio: int
+    año: int
     feriados: List[Feriado] = Field(alieas="lista_de_feriados")
 
 
@@ -60,7 +60,7 @@ def startup_db_event():
         print("INFO: Coleccion 'holidays_data' vacia. Insertando datos de ejemplo...")
         holidays_collection.insert_one({
             "pais": "CL",
-            "anio": 2025,
+            "año": 2025,
             "feriados": [
                 {"fecha": "2025-01-01", "nombre": "Año Nuevo"},
                 {"fecha": "2025-09-18", "nombre": "Independencia Nacional"},
