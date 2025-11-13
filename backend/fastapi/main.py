@@ -3,6 +3,8 @@ from fastapi import FastAPI, HTTPException, status
 from pymongo import MongoClient
 from pydantic import BaseModel, Field
 from typing import List, Optional
+from fastapi.middleware.cors import CORSMiddleware
+
 
 #1 Database setup
 app = FastAPI(
@@ -10,6 +12,18 @@ app = FastAPI(
     description="Backend FastApi de MongoDB",
     version="1.0.0"
 )
+# --- CONFIGURACIÓN DE CORS ---
+# Esto permite que el frontend (que corre en un dominio diferente)
+# pueda hacerle peticiones a esta API.
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Permite CUALQUIER origen (para el taller)
+    allow_credentials=True,
+    allow_methods=["*"],  # Permite todos los métodos (GET, POST, etc.)
+    allow_headers=["*"],  # Permite todas las cabeceras
+)
+# --- FIN DE CORS ---
 
 #Conecciom a la base de datos MongoDB
 
