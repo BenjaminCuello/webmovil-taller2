@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ILike, Repository } from 'typeorm';
+import { ILike, In, Repository } from 'typeorm';
 import { Pokemon } from './pokemon.entity';
 
 export interface SeedPokemon {
@@ -58,8 +58,11 @@ export class PokemonService {
       return;
     }
 
-    await this.pokemonRepository.upsert(pokemons, {
-      conflictPaths: ['id'],
-    });
+    const names = pokemons.map((pokemon) => pokemon.name);
+    await this.pokemonRepository.delete({ name: In(names) });
+
+    await this.pokemonRepository.save(
+      pokemons.map((pokemon) => this.pokemonRepository.create(pokemon)),
+    );
   }
 }
