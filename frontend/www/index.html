@@ -1,21 +1,24 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>InfoMóvil - Información dinámica de APIs públicas</title>
+    <title>InfoMóvil - Información dinámica desde nuestras APIs</title>
     <meta
       name="description"
-      content="Aplicación web móvil responsiva que centraliza información dinámica de Pokémon, países, clima y feriados usando APIs públicas"
+      content="Aplicación web móvil responsiva que centraliza información dinámica de Pokémon, países, clima y feriados usando nuestras propias APIs."
     />
-    <meta name="keywords" content="pokemon, países, clima, feriados, api, web movil, responsive" />
+    <meta
+      name="keywords"
+      content="pokemon, países, clima, feriados, api, web movil, responsive"
+    />
     <meta
       name="author"
       content="SmartCoders - Benjamin Salas, Tomas Guerra, Bastian Salinas, Benjamin Cuello"
     />
     <link rel="stylesheet" href="styles.css" />
     <script>
-      window.tailwind = window.tailwind || {}
+      window.tailwind = window.tailwind || {};
       window.tailwind.config = {
         safelist: [
           'bg-emerald-500/15',
@@ -42,7 +45,7 @@
           'text-emerald-700',
           'border-white/60',
         ],
-      }
+      };
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
@@ -58,24 +61,7 @@
               Explora datos de Pokémon, países, clima y feriados
             </p>
           </div>
-          <div class="flex items-center gap-2">
-            <span
-              id="mode-indicator"
-              class="inline-flex items-center justify-center rounded-full border border-white/30 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white"
-              aria-live="polite"
-            >
-              Modo: —
-            </span>
-            <label for="mode-select" class="sr-only">Seleccionar modo de datos</label>
-            <select
-              id="mode-select"
-              class="rounded-md border border-white/30 bg-white/20 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-white focus:border-white focus:outline-none focus:ring-2 focus:ring-white/60"
-            >
-              <option value="public">APIs públicas</option>
-              <option value="local">APIs locales</option>
-              <option value="mock">Datos mock</option>
-            </select>
-          </div>
+          <div class="flex items-center gap-2"></div>
         </div>
       </div>
     </header>
@@ -92,7 +78,7 @@
         <h2 class="text-xl font-semibold">Recursos disponibles</h2>
         <p class="mt-2 text-sm text-gray-600">
           Selecciona un recurso para ver un resumen o entra a su vista detallada para filtrar y
-          revisar más información
+          revisar más información.
         </p>
       </section>
 
@@ -102,7 +88,9 @@
             <h3 class="text-lg font-semibold">Pokémon</h3>
             <span class="text-xs uppercase text-blue-600">API</span>
           </header>
-          <p class="text-sm text-gray-600">Personajes destacados con imagen y número de Pokédex</p>
+          <p class="text-sm text-gray-600">
+            Personajes destacados con imagen y número de Pokédex
+          </p>
           <div
             id="contenedor-pokemon"
             class="tarjeta-datos text-sm text-gray-600"
@@ -124,7 +112,9 @@
             <h3 class="text-lg font-semibold">Países</h3>
             <span class="text-xs uppercase text-blue-600">API</span>
           </header>
-          <p class="text-sm text-gray-600">Información básica de países y regiones del mundo</p>
+          <p class="text-sm text-gray-600">
+            Información básica de países y regiones del mundo
+          </p>
           <div
             id="contenedor-paises"
             class="tarjeta-datos text-sm text-gray-600"
@@ -146,7 +136,9 @@
             <h3 class="text-lg font-semibold">Clima</h3>
             <span class="text-xs uppercase text-blue-600">API</span>
           </header>
-          <p class="text-sm text-gray-600">Temperatura y viento actuales en distintas ciudades</p>
+          <p class="text-sm text-gray-600">
+            Temperatura y viento actuales en distintas ciudades
+          </p>
           <div id="contenedor-clima" class="tarjeta-datos text-sm text-gray-600" aria-live="polite">
             <p class="text-gray-400">Cargando...</p>
           </div>
@@ -164,7 +156,9 @@
             <h3 class="text-lg font-semibold">Feriados</h3>
             <span class="text-xs uppercase text-blue-600">API</span>
           </header>
-          <p class="text-sm text-gray-600">Listado de feriados oficiales por país y año</p>
+          <p class="text-sm text-gray-600">
+            Listado de feriados oficiales por país y año
+          </p>
           <div
             id="contenedor-feriados"
             class="tarjeta-datos text-sm text-gray-600"
@@ -194,7 +188,7 @@
         </button>
         <h1 id="titulo-detalle" class="text-2xl md:text-3xl font-bold mt-2">Detalle</h1>
         <p id="descripcion-detalle" class="mt-2 text-sm md:text-base text-gray-600">
-          Selecciona un recurso para explorar sus datos
+          Selecciona un recurso para explorar sus datos.
         </p>
       </header>
       <section

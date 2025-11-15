@@ -1,0 +1,522 @@
+[
+  {
+    "pais": "CL",
+    "año": 2025,
+    "feriados": [
+      {
+        "fecha": "2025-01-01",
+        "nombre": "Año Nuevo"
+      },
+      {
+        "fecha": "2025-04-18",
+        "nombre": "Viernes Santo"
+      },
+      {
+        "fecha": "2025-04-19",
+        "nombre": "Sábado Santo"
+      },
+      {
+        "fecha": "2025-05-01",
+        "nombre": "Día del Trabajo"
+      },
+      {
+        "fecha": "2025-05-21",
+        "nombre": "Día de las Glorias Navales"
+      },
+      {
+        "fecha": "2025-06-07",
+        "nombre": "Asalto y Toma del Morro de Arica"
+      },
+      {
+        "fecha": "2025-06-20",
+        "nombre": "Día Nacional de los Pueblos Indígenas"
+      },
+      {
+        "fecha": "2025-06-29",
+        "nombre": "San Pedro y San Pablo"
+      },
+      {
+        "fecha": "2025-07-16",
+        "nombre": "Virgen del Carmen"
+      },
+      {
+        "fecha": "2025-08-15",
+        "nombre": "Asunción de la Virgen"
+      },
+      {
+        "fecha": "2025-09-18",
+        "nombre": "Fiestas Patrias"
+      },
+      {
+        "fecha": "2025-09-19",
+        "nombre": "Día de las Glorias del Ejército"
+      },
+      {
+        "fecha": "2025-10-12",
+        "nombre": "Día del Descubrimiento de Dos Mundos"
+      },
+      {
+        "fecha": "2025-10-31",
+        "nombre": "Día Nacional de las Iglesias Evangélicas y Protestantes"
+      },
+      {
+        "fecha": "2025-11-01",
+        "nombre": "Día de Todos los Santos"
+      },
+      {
+        "fecha": "2025-12-08",
+        "nombre": "Inmaculada Concepción"
+      },
+      {
+        "fecha": "2025-12-25",
+        "nombre": "Navidad / Natividad del Señor"
+      }
+    ]
+  },
+  {
+    "pais": "AR",
+    "año": 2025,
+    "feriados": [
+      {
+        "fecha": "2025-01-01",
+        "nombre": "Año Nuevo"
+      },
+      {
+        "fecha": "2025-03-03",
+        "nombre": "Carnaval"
+      },
+      {
+        "fecha": "2025-03-04",
+        "nombre": "Carnaval"
+      },
+      {
+        "fecha": "2025-03-24",
+        "nombre": "Día Nacional de la Memoria por la Verdad y la Justicia"
+      },
+      {
+        "fecha": "2025-04-02",
+        "nombre": "Día del Veterano y de los Caídos en la Guerra de Malvinas"
+      },
+      {
+        "fecha": "2025-04-18",
+        "nombre": "Viernes Santo"
+      },
+      {
+        "fecha": "2025-05-01",
+        "nombre": "Día del Trabajador"
+      },
+      {
+        "fecha": "2025-05-25",
+        "nombre": "Día de la Revolución de Mayo"
+      },
+      {
+        "fecha": "2025-06-16",
+        "nombre": "Paso a la Inmortalidad del General Martín Miguel de Güemes"
+      },
+      {
+        "fecha": "2025-06-20",
+        "nombre": "Paso a la Inmortalidad del General Manuel Belgrano"
+      },
+      {
+        "fecha": "2025-07-09",
+        "nombre": "Día de la Independencia"
+      },
+      {
+        "fecha": "2025-08-17",
+        "nombre": "Paso a la Inmortalidad del General José de San Martín"
+      },
+      {
+        "fecha": "2025-10-12",
+        "nombre": "Día del Respeto a la Diversidad Cultural"
+      },
+      {
+        "fecha": "2025-11-24",
+        "nombre": "Día de la Soberanía Nacional"
+      },
+      {
+        "fecha": "2025-12-08",
+        "nombre": "Día de la Inmaculada Concepción de María"
+      },
+      {
+        "fecha": "2025-12-25",
+        "nombre": "Navidad"
+      }
+    ]
+  },
+  {
+    "pais": "PE",
+    "año": 2025,
+    "feriados": [
+      {
+        "fecha": "2025-01-01",
+        "nombre": "Año Nuevo"
+      },
+      {
+        "fecha": "2025-04-17",
+        "nombre": "Jueves Santo"
+      },
+      {
+        "fecha": "2025-04-17",
+        "nombre": "Jueves Santo"
+      },
+      {
+        "fecha": "2025-04-18",
+        "nombre": "Viernes Santo"
+      },
+      {
+        "fecha": "2025-04-20",
+        "nombre": "Domingo Santo"
+      },
+      {
+        "fecha": "2025-05-01",
+        "nombre": "Día del Trabajo"
+      },
+      {
+        "fecha": "2025-06-29",
+        "nombre": "Día de San Pedro y San Pablo"
+      },
+      {
+        "fecha": "2025-07-28",
+        "nombre": "Día de la Independencia"
+      },
+      {
+        "fecha": "2025-07-29",
+        "nombre": "Día de la Independencia"
+      },
+      {
+        "fecha": "2025-08-30",
+        "nombre": "Día de Santa Rosa de Lima"
+      },
+      {
+        "fecha": "2025-10-08",
+        "nombre": "Combate de Angamos"
+      },
+      {
+        "fecha": "2025-11-01",
+        "nombre": "Día de Todos los Santos"
+      },
+      {
+        "fecha": "2025-12-08",
+        "nombre": "Inmaculada Concepción"
+      },
+      {
+        "fecha": "2025-12-25",
+        "nombre": "Navidad"
+      }
+    ]
+  },
+  {
+    "pais": "BO",
+    "año": 2025,
+    "feriados": [
+      {
+        "fecha": "2025-01-01",
+        "nombre": "Año Nuevo"
+      },
+      {
+        "fecha": "2025-02-02",
+        "nombre": "Fiesta de la Virgen de Candelaria"
+      },
+      {
+        "fecha": "2025-03-03",
+        "nombre": "Feriado por Carnaval"
+      },
+      {
+        "fecha": "2025-03-04",
+        "nombre": "Feriado por Carnaval"
+      },
+      {
+        "fecha": "2025-04-18",
+        "nombre": "Viernes Santo"
+      },
+      {
+        "fecha": "2025-05-01",
+        "nombre": "Dia del trabajo"
+      },
+      {
+        "fecha": "2025-06-19",
+        "nombre": "Corpus Christi"
+      },
+      {
+        "fecha": "2025-06-21",
+        "nombre": "Año Nuevo Andino"
+      },
+      {
+        "fecha": "2025-08-02",
+        "nombre": "Día de la Revolución Agraria"
+      },
+      {
+        "fecha": "2025-08-06",
+        "nombre": "Dia de la Patria"
+      },
+      {
+        "fecha": "2025-11-02",
+        "nombre": "Todos Santos"
+      },
+      {
+        "fecha": "2025-12-25",
+        "nombre": "Navidad"
+      }
+    ]
+  },
+  {
+    "pais": "EC",
+    "año": 2025,
+    "feriados": [
+      {
+        "fecha": "2025-01-01",
+        "nombre": "Año Nuevo"
+      },
+      {
+        "fecha": "2025-03-03",
+        "nombre": "Carnaval"
+      },
+      {
+        "fecha": "2025-03-04",
+        "nombre": "Carnaval"
+      },
+      {
+        "fecha": "2025-04-18",
+        "nombre": "Good Friday"
+      },
+      {
+        "fecha": "2025-05-01",
+        "nombre": "International Workers' Day"
+      },
+      {
+        "fecha": "2025-05-24",
+        "nombre": "Batalla de Pichincha"
+      },
+      {
+        "fecha": "2025-08-10",
+        "nombre": "Primer Grito de Independencia"
+      },
+      {
+        "fecha": "2025-10-09",
+        "nombre": "Independencia de Guayaquil"
+      },
+      {
+        "fecha": "2025-11-02",
+        "nombre": "Día de los Difuntos, Día de Muertos"
+      },
+      {
+        "fecha": "2025-11-03",
+        "nombre": "Independencia de Cuenca"
+      },
+      {
+        "fecha": "2025-12-25",
+        "nombre": "Día de Navidad"
+      }
+    ]
+  },
+  {
+    "pais": "CO",
+    "año": 2025,
+    "feriados": [
+      {
+        "fecha": "2025-01-01",
+        "nombre": "Año Nuevo"
+      },
+      {
+        "fecha": "2025-01-06",
+        "nombre": "Día de los Reyes Magos"
+      },
+      {
+        "fecha": "2025-03-24",
+        "nombre": "Día de San José"
+      },
+      {
+        "fecha": "2025-04-17",
+        "nombre": "Jueves Santo"
+      },
+      {
+        "fecha": "2025-04-18",
+        "nombre": "Viernes Santo"
+      },
+      {
+        "fecha": "2025-05-01",
+        "nombre": "Primero de Mayo"
+      },
+      {
+        "fecha": "2025-06-02",
+        "nombre": "Ascensión del señor"
+      },
+      {
+        "fecha": "2025-06-23",
+        "nombre": "Corpus Christi"
+      },
+      {
+        "fecha": "2025-06-30",
+        "nombre": "San Pedro y San Pablo"
+      },
+      {
+        "fecha": "2025-06-30",
+        "nombre": "Sagrado Corazón"
+      },
+      {
+        "fecha": "2025-07-20",
+        "nombre": "Declaracion de la Independencia de Colombia"
+      },
+      {
+        "fecha": "2025-08-07",
+        "nombre": "Batalla de Boyacá"
+      },
+      {
+        "fecha": "2025-08-18",
+        "nombre": "La Asunción"
+      },
+      {
+        "fecha": "2025-10-13",
+        "nombre": "Día de la Raza"
+      },
+      {
+        "fecha": "2025-11-03",
+        "nombre": "Dia de los Santos"
+      },
+      {
+        "fecha": "2025-11-17",
+        "nombre": "Independencia de Cartagena"
+      },
+      {
+        "fecha": "2025-12-08",
+        "nombre": "La Inmaculada Concepción"
+      },
+      {
+        "fecha": "2025-12-25",
+        "nombre": "Navidad"
+      }
+    ]
+  },
+  {
+    "pais": "BR",
+    "año": 2025,
+    "feriados": [
+      {
+        "fecha": "2025-01-01",
+        "nombre": "Confraternização Universal"
+      },
+      {
+        "fecha": "2025-03-03",
+        "nombre": "Carnaval"
+      },
+      {
+        "fecha": "2025-03-04",
+        "nombre": "Carnaval"
+      },
+      {
+        "fecha": "2025-04-18",
+        "nombre": "Sexta-feira Santa"
+      },
+      {
+        "fecha": "2025-04-20",
+        "nombre": "Domingo de Páscoa"
+      },
+      {
+        "fecha": "2025-04-21",
+        "nombre": "Dia de Tiradentes"
+      },
+      {
+        "fecha": "2025-05-01",
+        "nombre": "Dia do Trabalhador"
+      },
+      {
+        "fecha": "2025-06-19",
+        "nombre": "Corpus Christi"
+      },
+      {
+        "fecha": "2025-07-09",
+        "nombre": "Revolução Constitucionalista de 1932"
+      },
+      {
+        "fecha": "2025-09-07",
+        "nombre": "Dia da Independência"
+      },
+      {
+        "fecha": "2025-10-12",
+        "nombre": "Nossa Senhora Aparecida"
+      },
+      {
+        "fecha": "2025-11-02",
+        "nombre": "Dia de Finados"
+      },
+      {
+        "fecha": "2025-11-15",
+        "nombre": "Proclamação da República"
+      },
+      {
+        "fecha": "2025-11-20",
+        "nombre": "Dia da Consciência Negra"
+      },
+      {
+        "fecha": "2025-12-25",
+        "nombre": "Natal"
+      }
+    ]
+  },
+  {
+    "pais": "UY",
+    "año": 2025,
+    "feriados": [
+      {
+        "fecha": "2025-01-01",
+        "nombre": "Año Nuevo"
+      },
+      {
+        "fecha": "2025-01-06",
+        "nombre": "Día de los Niños"
+      },
+      {
+        "fecha": "2025-03-03",
+        "nombre": "Carnaval"
+      },
+      {
+        "fecha": "2025-03-04",
+        "nombre": "Carnaval"
+      },
+      {
+        "fecha": "2025-04-17",
+        "nombre": "Semana de Turismo"
+      },
+      {
+        "fecha": "2025-04-18",
+        "nombre": "Semana de Turismo"
+      },
+      {
+        "fecha": "2025-04-19",
+        "nombre": "Desembarco de los 33 Orientales"
+      },
+      {
+        "fecha": "2025-05-01",
+        "nombre": "Día de los Trabajadores"
+      },
+      {
+        "fecha": "2025-05-18",
+        "nombre": "Batalla de las Piedras"
+      },
+      {
+        "fecha": "2025-06-19",
+        "nombre": "Natalicio de Artigas y Día del Nunca Más"
+      },
+      {
+        "fecha": "2025-07-18",
+        "nombre": "Jura de la Constitución"
+      },
+      {
+        "fecha": "2025-08-25",
+        "nombre": "Día de la Independencia"
+      },
+      {
+        "fecha": "2025-10-12",
+        "nombre": "Día de la Raza"
+      },
+      {
+        "fecha": "2025-11-02",
+        "nombre": "Día de los Difuntos"
+      },
+      {
+        "fecha": "2025-12-25",
+        "nombre": "Día de la Familia"
+      }
+    ]
+  }
+]

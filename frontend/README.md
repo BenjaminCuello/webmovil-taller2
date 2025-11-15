@@ -11,30 +11,25 @@ Este directorio contiene la aplicación web móvil (HTML + Tailwind + JS puro) q
 
 ```
 frontend/
-├── Dockerfile          # Nginx que sirve /www
+├── Dockerfile        # Nginx que sirve /www
 └── www/
-    ├── index.html      # Landing + vistas de detalle
-    ├── styles.css      # Estilos base adicionales a Tailwind
-    ├── js/             # Lógica separada por dominio
-    │   ├── config.js   # MODE + URLs (public/local/mock)
-    │   ├── api.js      # Fetch a APIs (públicas, locales o mocks)
-    │   ├── *.js        # Módulos de Pokémon, Países, Clima, Feriados
-    └── mock/           # Datos locales para MODE='mock'
+    ├── index.html    # Landing + vistas de detalle
+    ├── styles.css    # Estilos base adicionales a Tailwind
+    └── js/           # Lógica separada por dominio
+        ├── config.js # URLs base de las APIs propias
+        ├── api.js    # Fetch a las APIs propias (Nest/Express/FastAPI)
+        └── *.js      # Módulos de Pokémon, Países, Clima, Feriados
 ```
 
-## Modos de ejecución
+## Configuración de APIs
 
-- `public` (default): usa las APIs públicas del Taller 1.
-- `local`: usa los backends propios (Nest/Express/FastAPI). Ajusta las URL en `js/config.js`.
-- `mock`: usa los JSON de `frontend/www/mock/` (sin depender de Internet ni backend).
+El frontend está pensado para consumir **solo** las APIs propias del Taller 2:
 
-Cambiar modo:
+- NestJS → `/pokemon` (lista + detalle)
+- Express → `/countries` y `/countries/search`
+- FastAPI → `/weather?city=` y `/holidays/{countryCode}/{year}`
 
-1. Desde el encabezado de la app usando el selector de modo (se persiste en `localStorage`).
-2. Editar `frontend/www/js/config.js` y setear `var MODE = 'mock'` o `var MODE = 'local'`.
-3. Para pruebas puntuales se puede usar query param, ej: `http://localhost:8080/?mode=mock`.
-
----
+Para ajustar los hosts/puertos (localhost, emulador Android, Docker), edita `frontend/www/js/config.js`.
 
 ### Docker Compose
 
@@ -44,10 +39,9 @@ docker-compose up --build frontend --no-deps
 # Frontend disponible en http://localhost:8080
 ```
 
-## Integración de backend a considerar al pasar a Cordova
+## Integración de backend al pasar a Cordova
 
-- NestJS debe exponer `/pokemon` (lista + detalle) y habilitar CORS (`GET` desde `http://localhost:8080`).
+- NestJS debe exponer `/pokemon` (lista + detalle) y habilitar CORS.
 - Express debe exponer `/countries` y `/countries/search` con los campos consumidos por el frontend.
-- FastAPI debe exponer `/weather?city=` y `/holidays/{country}/{year}` retornando el mismo payload que los mocks.
-- Si desplegarás en dispositivos reales, considera usar HTTPS o un túnel (ngrok, localtunnel) para evitar bloqueos.
-- Documenta en `README.md` cualquier credencial necesaria o variable de entorno para los backends.
+- FastAPI debe exponer `/weather?city=` y `/holidays/{countryCode}/{year}` retornando el mismo JSON que el contrato del Taller 1.
+

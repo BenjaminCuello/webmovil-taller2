@@ -1,122 +1,143 @@
 import uvicorn
 from fastapi import FastAPI, HTTPException, status
-from pymongo import MongoClient
-from pydantic import BaseModel, Field
-from typing import List, Optional
 from fastapi.middleware.cors import CORSMiddleware
+from pymongo import MongoClient
+from pydantic import BaseModel
+from typing import List, Optional
+import json
+import os
 
 
-#1 Database setup
 app = FastAPI(
-    title="API de clima y feriados ",
-    description="Backend FastApi de MongoDB",
-    version="1.0.0"
+    title="API de clima y feriados",
+    description="Backend FastAPI con MongoDB para InfoMóvil",
+    version="1.0.0",
 )
-# --- CONFIGURACIÓN DE CORS ---
-# Esto permite que el frontend (que corre en un dominio diferente)
-# pueda hacerle peticiones a esta API.
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Permite CUALQUIER origen (para el taller)
+    allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["*"],  # Permite todos los métodos (GET, POST, etc.)
-    allow_headers=["*"],  # Permite todas las cabeceras
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
-# --- FIN DE CORS ---
 
-#Conecciom a la base de datos MongoDB
 
-CONNECTION_STRING = "mongodb+srv://webmovil:taller123@cluster0.quu5kix.mongodb.net/?appName=Cluster0"
-#Conectar el Cliente de MongoDB
+CONNECTION_STRING = (
+    "mongodb+srv://webmovil:taller123@cluster0.quu5kix.mongodb.net/?appName=Cluster0"
+)
 client = MongoClient(CONNECTION_STRING)
 db = client["infomovil"]
 weather_collection = db["weather_data"]
 holidays_collection = db["holidays_data"]
 
-#2 Modelos de datos (Pydantic)
+
+class Coordinates(BaseModel):
+    name: str
+    country_code: Optional[str] = None
+    latitude: float
+    longitude: float
+
+
+class WeatherCurrent(BaseModel):
+    temperature_2m: float
+    wind_speed_10m: float
+
+
+class WeatherData(BaseModel):
+    current: WeatherCurrent
+
 
 class WeatherResponse(BaseModel):
-    ciudad: str
-    latitud: float
-    longitud: float
-    temperatura: float
-    viento: float
-
-class Feriado(BaseModel):
-    fecha: str
-    nombre: str
-
-class HolidaysResponse(BaseModel):
-    pais: str
-    año: int
-    feriados: List[Feriado] = Field(alieas="lista_de_feriados")
+    coordenadas: Coordinates
+    clima: WeatherData
 
 
-    class config:
-        allow_population_by_field_name = True
+class HolidayItem(BaseModel):
+    date: str
+    localName: str
+    name: str
 
-#3 Evento de inicio
+
+def load_json_relative(filename: str):
+    base_dir = os.path.dirname(__file__)
+    path = os.path.join(base_dir, filename)
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
 @app.on_event("startup")
-def startup_db_event():
+def startup_db_event() -> None:
+    if weather_collection.count_documents({}) < 30:
+        print("INFO: Sembrando datos de clima desde archivo local...")
+        weather_collection.delete_many({})
+        weather_seed = load_json_relative("weather-seed.json")
+        if isinstance(weather_seed, list):
+            weather_collection.insert_many(weather_seed)
 
-    if weather_collection.count_documents({}) == 0:
-        print("INFO: Coleccion 'weather_data' vacia. Insertando datos de ejemplo...")
-        weather_collection.insert_one({
-            "ciudad": "La Serena",
-            "latitud": -29.9045,
-            "longitud": -71.2489,
-            "temperatura": 17.8,
-            "viento": 14.2
-        })
+    if holidays_collection.count_documents({}) < 5:
+        print("INFO: Sembrando datos de feriados desde archivo local...")
+        holidays_collection.delete_many({})
+        holidays_seed = load_json_relative("holidays-seed.json")
+        if isinstance(holidays_seed, list):
+            holidays_collection.insert_many(holidays_seed)
 
-    if holidays_collection.count_documents({}) == 0:
-        print("INFO: Coleccion 'holidays_data' vacia. Insertando datos de ejemplo...")
-        holidays_collection.insert_one({
-            "pais": "CL",
-            "año": 2025,
-            "feriados": [
-                {"fecha": "2025-01-01", "nombre": "Año Nuevo"},
-                {"fecha": "2025-09-18", "nombre": "Independencia Nacional"},
-                {"fecha": "2025-12-25", "nombre": "Navidad"}
-            ]
-        })
-#4 Rutas de la API
+
 @app.get("/weather", response_model=WeatherResponse)
-def get_weather(ciudad: str):
-    """
-    Obtener datos climáticos para una ciudad específica.
-    """
+def get_weather(city: str) -> WeatherResponse:
     weather_data = weather_collection.find_one(
-        {"ciudad": {"$regex": f"^{ciudad}$", "$options": "i"}},
-        {"_id": 0}
-        )
-    if weather_data:
-        return weather_data
-    
-    raise HTTPException(
-        status_code=status.HTTP_404_NOT_FOUND,
-        detail=f"No se encontraron datos climáticos para la ciudad: {ciudad}"
+        {"ciudad": {"$regex": f"^{city}$", "$options": "i"}},
+        {"_id": 0},
     )
 
-#Endpoint para obtener feriados
-@app.get("/holidays/{countrycode}/{year}", response_model=HolidaysResponse)
-def get_holidays(countrycode: str, year: int):
-    """
-    Obtener feriados para un país y año específicos.
-    """
+    if not weather_data:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"No se encontraron datos climáticos para la ciudad: {city}",
+        )
+
+    country_code = weather_data.get("country_code") or "CL"
+
+    return WeatherResponse(
+        coordenadas=Coordinates(
+            name=weather_data.get("ciudad", city),
+            country_code=country_code,
+            latitude=weather_data["latitud"],
+            longitude=weather_data["longitud"],
+        ),
+        clima=WeatherData(
+            current=WeatherCurrent(
+                temperature_2m=weather_data["temperatura"],
+                wind_speed_10m=weather_data["viento"],
+            )
+        ),
+    )
+
+
+@app.get("/holidays/{countrycode}/{year}", response_model=List[HolidayItem])
+def get_holidays(countrycode: str, year: int) -> List[HolidayItem]:
     holiday_data = holidays_collection.find_one(
         {"pais": countrycode.upper(), "año": year},
-        {"_id": 0}
-    )
-    if holiday_data:
-        return holiday_data
-    
-    raise HTTPException(
-        status_code=status.HTTP_404_NOT_FOUND,
-        detail=f"No se encontraron feriados para el país: {countrycode} en el año: {year}"
+        {"_id": 0},
     )
 
-#5 Ejecutar la aplicación
+    if not holiday_data:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"No se encontraron feriados para el país: {countrycode} en el año: {year}",
+        )
+
+    feriados = holiday_data.get("feriados", [])
+    return [
+        HolidayItem(
+            date=item["fecha"],
+            localName=item["nombre"],
+            name=item["nombre"],
+        )
+        for item in feriados
+    ]
+
+
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
+

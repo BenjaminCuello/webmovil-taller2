@@ -1,0 +1,302 @@
+[
+  {
+    "common_name": "Afghanistan",
+    "official_name": "Islamic Republic of Afghanistan",
+    "cca2": "AF",
+    "region": "Asia",
+    "capital": "Kabul",
+    "population": 43844000,
+    "flag_png": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Flag_of_the_Taliban.svg/320px-Flag_of_the_Taliban.svg.png",
+    "flag_svg": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_the_Taliban.svg"
+  },
+  {
+    "common_name": "Åland Islands",
+    "official_name": "Åland Islands",
+    "cca2": "AX",
+    "region": "Europe",
+    "capital": "Mariehamn",
+    "population": 30654,
+    "flag_png": "https://flagcdn.com/w320/ax.png",
+    "flag_svg": "https://flagcdn.com/ax.svg"
+  },
+  {
+    "common_name": "Albania",
+    "official_name": "Republic of Albania",
+    "cca2": "AL",
+    "region": "Europe",
+    "capital": "Tirana",
+    "population": 2363314,
+    "flag_png": "https://flagcdn.com/w320/al.png",
+    "flag_svg": "https://flagcdn.com/al.svg"
+  },
+  {
+    "common_name": "Algeria",
+    "official_name": "People's Democratic Republic of Algeria",
+    "cca2": "DZ",
+    "region": "Africa",
+    "capital": "Algiers",
+    "population": 47400000,
+    "flag_png": "https://flagcdn.com/w320/dz.png",
+    "flag_svg": "https://flagcdn.com/dz.svg"
+  },
+  {
+    "common_name": "American Samoa",
+    "official_name": "American Samoa",
+    "cca2": "AS",
+    "region": "Oceania",
+    "capital": "Pago Pago",
+    "population": 49710,
+    "flag_png": "https://flagcdn.com/w320/as.png",
+    "flag_svg": "https://flagcdn.com/as.svg"
+  },
+  {
+    "common_name": "Andorra",
+    "official_name": "Principality of Andorra",
+    "cca2": "AD",
+    "region": "Europe",
+    "capital": "Andorra la Vella",
+    "population": 88406,
+    "flag_png": "https://flagcdn.com/w320/ad.png",
+    "flag_svg": "https://flagcdn.com/ad.svg"
+  },
+  {
+    "common_name": "Angola",
+    "official_name": "Republic of Angola",
+    "cca2": "AO",
+    "region": "Africa",
+    "capital": "Luanda",
+    "population": 36170961,
+    "flag_png": "https://flagcdn.com/w320/ao.png",
+    "flag_svg": "https://flagcdn.com/ao.svg"
+  },
+  {
+    "common_name": "Anguilla",
+    "official_name": "Anguilla",
+    "cca2": "AI",
+    "region": "Americas",
+    "capital": "The Valley",
+    "population": 16010,
+    "flag_png": "https://flagcdn.com/w320/ai.png",
+    "flag_svg": "https://flagcdn.com/ai.svg"
+  },
+  {
+    "common_name": "Antarctica",
+    "official_name": "Antarctica",
+    "cca2": "AQ",
+    "region": "Antarctic",
+    "capital": null,
+    "population": 1300,
+    "flag_png": "https://flagcdn.com/w320/aq.png",
+    "flag_svg": "https://flagcdn.com/aq.svg"
+  },
+  {
+    "common_name": "Antigua and Barbuda",
+    "official_name": "Antigua and Barbuda",
+    "cca2": "AG",
+    "region": "Americas",
+    "capital": "Saint John's",
+    "population": 103603,
+    "flag_png": "https://flagcdn.com/w320/ag.png",
+    "flag_svg": "https://flagcdn.com/ag.svg"
+  },
+  {
+    "common_name": "Argentina",
+    "official_name": "Argentine Republic",
+    "cca2": "AR",
+    "region": "Americas",
+    "capital": "Buenos Aires",
+    "population": 46735004,
+    "flag_png": "https://flagcdn.com/w320/ar.png",
+    "flag_svg": "https://flagcdn.com/ar.svg"
+  },
+  {
+    "common_name": "Armenia",
+    "official_name": "Republic of Armenia",
+    "cca2": "AM",
+    "region": "Asia",
+    "capital": "Yerevan",
+    "population": 3076200,
+    "flag_png": "https://flagcdn.com/w320/am.png",
+    "flag_svg": "https://flagcdn.com/am.svg"
+  },
+  {
+    "common_name": "Aruba",
+    "official_name": "Aruba",
+    "cca2": "AW",
+    "region": "Americas",
+    "capital": "Oranjestad",
+    "population": 107566,
+    "flag_png": "https://flagcdn.com/w320/aw.png",
+    "flag_svg": "https://flagcdn.com/aw.svg"
+  },
+  {
+    "common_name": "Australia",
+    "official_name": "Commonwealth of Australia",
+    "cca2": "AU",
+    "region": "Oceania",
+    "capital": "Canberra",
+    "population": 27536874,
+    "flag_png": "https://flagcdn.com/w320/au.png",
+    "flag_svg": "https://flagcdn.com/au.svg"
+  },
+  {
+    "common_name": "Austria",
+    "official_name": "Republic of Austria",
+    "cca2": "AT",
+    "region": "Europe",
+    "capital": "Vienna",
+    "population": 9200931,
+    "flag_png": "https://flagcdn.com/w320/at.png",
+    "flag_svg": "https://flagcdn.com/at.svg"
+  },
+  {
+    "common_name": "Azerbaijan",
+    "official_name": "Republic of Azerbaijan",
+    "cca2": "AZ",
+    "region": "Asia",
+    "capital": "Baku",
+    "population": 10241722,
+    "flag_png": "https://flagcdn.com/w320/az.png",
+    "flag_svg": "https://flagcdn.com/az.svg"
+  },
+  {
+    "common_name": "Bahamas",
+    "official_name": "Commonwealth of the Bahamas",
+    "cca2": "BS",
+    "region": "Americas",
+    "capital": "Nassau",
+    "population": 398165,
+    "flag_png": "https://flagcdn.com/w320/bs.png",
+    "flag_svg": "https://flagcdn.com/bs.svg"
+  },
+  {
+    "common_name": "Bahrain",
+    "official_name": "Kingdom of Bahrain",
+    "cca2": "BH",
+    "region": "Asia",
+    "capital": "Manama",
+    "population": 1594654,
+    "flag_png": "https://flagcdn.com/w320/bh.png",
+    "flag_svg": "https://flagcdn.com/bh.svg"
+  },
+  {
+    "common_name": "Bangladesh",
+    "official_name": "People's Republic of Bangladesh",
+    "cca2": "BD",
+    "region": "Asia",
+    "capital": "Dhaka",
+    "population": 169828911,
+    "flag_png": "https://flagcdn.com/w320/bd.png",
+    "flag_svg": "https://flagcdn.com/bd.svg"
+  },
+  {
+    "common_name": "Barbados",
+    "official_name": "Barbados",
+    "cca2": "BB",
+    "region": "Americas",
+    "capital": "Bridgetown",
+    "population": 267800,
+    "flag_png": "https://flagcdn.com/w320/bb.png",
+    "flag_svg": "https://flagcdn.com/bb.svg"
+  },
+  {
+    "common_name": "Belarus",
+    "official_name": "Republic of Belarus",
+    "cca2": "BY",
+    "region": "Europe",
+    "capital": "Minsk",
+    "population": 9109280,
+    "flag_png": "https://flagcdn.com/w320/by.png",
+    "flag_svg": "https://flagcdn.com/by.svg"
+  },
+  {
+    "common_name": "Belgium",
+    "official_name": "Kingdom of Belgium",
+    "cca2": "BE",
+    "region": "Europe",
+    "capital": "Brussels",
+    "population": 11825551,
+    "flag_png": "https://flagcdn.com/w320/be.png",
+    "flag_svg": "https://flagcdn.com/be.svg"
+  },
+  {
+    "common_name": "Belize",
+    "official_name": "Belize",
+    "cca2": "BZ",
+    "region": "Americas",
+    "capital": "Belmopan",
+    "population": 417634,
+    "flag_png": "https://flagcdn.com/w320/bz.png",
+    "flag_svg": "https://flagcdn.com/bz.svg"
+  },
+  {
+    "common_name": "Benin",
+    "official_name": "Republic of Benin",
+    "cca2": "BJ",
+    "region": "Africa",
+    "capital": "Porto-Novo",
+    "population": 13224860,
+    "flag_png": "https://flagcdn.com/w320/bj.png",
+    "flag_svg": "https://flagcdn.com/bj.svg"
+  },
+  {
+    "common_name": "Bermuda",
+    "official_name": "Bermuda",
+    "cca2": "BM",
+    "region": "Americas",
+    "capital": "Hamilton",
+    "population": 64055,
+    "flag_png": "https://flagcdn.com/w320/bm.png",
+    "flag_svg": "https://flagcdn.com/bm.svg"
+  },
+  {
+    "common_name": "Bhutan",
+    "official_name": "Kingdom of Bhutan",
+    "cca2": "BT",
+    "region": "Asia",
+    "capital": "Thimphu",
+    "population": 784043,
+    "flag_png": "https://flagcdn.com/w320/bt.png",
+    "flag_svg": "https://flagcdn.com/bt.svg"
+  },
+  {
+    "common_name": "Bolivia",
+    "official_name": "Plurinational State of Bolivia",
+    "cca2": "BO",
+    "region": "Americas",
+    "capital": "Sucre",
+    "population": 11365333,
+    "flag_png": "https://flagcdn.com/w320/bo.png",
+    "flag_svg": "https://flagcdn.com/bo.svg"
+  },
+  {
+    "common_name": "Bosnia and Herzegovina",
+    "official_name": "Bosnia and Herzegovina",
+    "cca2": "BA",
+    "region": "Europe",
+    "capital": "Sarajevo",
+    "population": 3422000,
+    "flag_png": "https://flagcdn.com/w320/ba.png",
+    "flag_svg": "https://flagcdn.com/ba.svg"
+  },
+  {
+    "common_name": "Botswana",
+    "official_name": "Republic of Botswana",
+    "cca2": "BW",
+    "region": "Africa",
+    "capital": "Gaborone",
+    "population": 2359609,
+    "flag_png": "https://flagcdn.com/w320/bw.png",
+    "flag_svg": "https://flagcdn.com/bw.svg"
+  },
+  {
+    "common_name": "Bouvet Island",
+    "official_name": "Bouvet Island",
+    "cca2": "BV",
+    "region": "Antarctic",
+    "capital": null,
+    "population": 0,
+    "flag_png": "https://flagcdn.com/w320/bv.png",
+    "flag_svg": "https://flagcdn.com/bv.svg"
+  }
+]

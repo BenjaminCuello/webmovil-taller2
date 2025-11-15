@@ -7,5 +7,6 @@ RUN npm install
 
 COPY api-pokemon/. ./
 
-CMD ["npm", "run", "start:dev"]
+# Al iniciar el contenedor: sembrar datos y luego arrancar NestJS
+CMD ["sh", "-c", "npm run seed && npm run start:dev"]
 

@@ -21,14 +21,15 @@ export class PokemonService {
     private readonly pokemonRepository: Repository<Pokemon>,
   ) {}
 
-  async findAll(limit = 20, offset = 0): Promise<Pokemon[]> {
+  async findAll(limit = 20, offset = 0): Promise<{ items: Pokemon[]; total: number }> {
     const safeLimit = Math.min(Math.max(limit, 1), 50);
     const safeOffset = Math.max(offset, 0);
-    return this.pokemonRepository.find({
+    const [items, total] = await this.pokemonRepository.findAndCount({
       order: { id: 'ASC' },
       take: safeLimit,
       skip: safeOffset,
     });
+    return { items, total };
   }
 
   async findOne(idOrName: string): Promise<Pokemon> {
@@ -51,6 +52,10 @@ export class PokemonService {
     }
 
     throw new NotFoundException(`Pokemon ${idOrName} not found`);
+  }
+
+  async countAll(): Promise<number> {
+    return this.pokemonRepository.count();
   }
 
   async seed(pokemons: SeedPokemon[]): Promise<void> {

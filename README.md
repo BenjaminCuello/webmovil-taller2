@@ -15,29 +15,50 @@
 
 ## Descripción General
 
-InfoMóvil ahora integra un ecosistema con **3 servicios backend propios** y un **frontend móvil empaquetado como aplicación Android (APK)** usando **Apache Cordova**.
+InfoMóvil integra un ecosistema con **3 servicios backend propios** y un **frontend móvil empaquetado como aplicación Android (APK)** usando **Apache Cordova**.
 
 La app mantiene las mismas funcionalidades del Taller 1 (Pokémon, países, clima y feriados), pero ahora **todos los datos provienen de nuestras propias APIs y bases de datos**.
 
 ---
 
-## Objetivos del Proyecto
-
-- Desarrollar **3 APIs independientes**, cada una en una tecnología distinta.
-- Crear un **frontend móvil responsivo** que consuma dichas APIs.
-- **Empaquetar la app como APK Android** funcional.
-- Mantener el mismo diseño, navegación y estructura modular del Taller 1.
-
----
-
-## APIs a usar:
+## APIs propias
 
 ### API 1 — Pokémon (NestJS + PostgreSQL)
 
 - **Endpoints**
-  - `GET /pokemon?limit&offset` → lista de pokemones
-  - `GET /pokemon/:nombreOId` → detalle de un pokemon
-- **Datos almacenados:** id, nombre, sprites, tipos, altura, peso, estadísticas.
+  - `GET /pokemon?limit=&offset=` → lista de pokémon
+  - `GET /pokemon/:idOrName` → detalle de un pokémon
+- **Datos expuestos (contrato similar a PokeAPI):**
+  - Listado:
+    ```json
+    {
+      "count": 10,
+      "results": [{ "name": "bulbasaur" }, { "name": "ivysaur" }]
+    }
+    ```
+  - Detalle:
+    ```json
+    {
+      "id": 25,
+      "name": "pikachu",
+      "height": 4,
+      "weight": 60,
+      "types": [{ "slot": 1, "type": { "name": "electric" } }],
+      "sprites": {
+        "front_default": "https://.../25.png",
+        "back_default": null,
+        "other": {
+          "official-artwork": {
+            "front_default": "https://.../official-artwork/25.png"
+          }
+        }
+      },
+      "stats": [
+        { "base_stat": 35, "stat": { "name": "hp" } },
+        { "base_stat": 55, "stat": { "name": "attack" } }
+      ]
+    }
+    ```
 - **Puerto:** `http://localhost:3000`
 
 ---
@@ -47,7 +68,19 @@ La app mantiene las mismas funcionalidades del Taller 1 (Pokémon, países, clim
 - **Endpoints**
   - `GET /countries` → lista de todos los países
   - `GET /countries/search?name=Chile` → búsqueda por nombre
-- **Datos:** nombre común, oficial, bandera, región, capital, población, código ISO.
+- **Datos expuestos (contrato similar a RestCountries):**
+  ```json
+  [
+    {
+      "name": { "common": "Chile", "official": "Republic of Chile" },
+      "flags": { "png": "https://flagcdn.com/w320/cl.png", "svg": "https://flagcdn.com/cl.svg" },
+      "region": "Americas",
+      "capital": ["Santiago"],
+      "population": 19116201,
+      "cca2": "CL"
+    }
+  ]
+  ```
 - **Puerto:** `http://localhost:4000`
 
 ---
@@ -57,9 +90,31 @@ La app mantiene las mismas funcionalidades del Taller 1 (Pokémon, países, clim
 - **Endpoints**
   - `GET /weather?city=La%20Serena` → devuelve temperatura y viento actuales
   - `GET /holidays/{countryCode}/{year}` → devuelve feriados del país y año indicado
-- **Datos:**
-  - Clima → nombre, latitud, longitud, temperatura, viento.
-  - Feriados → fecha, nombre local y nombre oficial.
+- **Datos expuestos (contrato similar a Open-Meteo y NagerDate):**
+  - Clima:
+    ```json
+    {
+      "coordenadas": {
+        "name": "Coquimbo",
+        "country_code": "CL",
+        "latitude": -29.95,
+        "longitude": -71.34
+      },
+      "clima": {
+        "current": {
+          "temperature_2m": 16.4,
+          "wind_speed_10m": 5.1
+        }
+      }
+    }
+    ```
+  - Feriados:
+    ```json
+    [
+      { "date": "2025-01-01", "localName": "Año Nuevo", "name": "Año Nuevo" },
+      { "date": "2025-09-18", "localName": "Independencia Nacional", "name": "Independencia Nacional" }
+    ]
+    ```
 - **Puerto:** `http://localhost:8000`
 
 ---
@@ -67,24 +122,20 @@ La app mantiene las mismas funcionalidades del Taller 1 (Pokémon, países, clim
 ## Frontend (Cordova + HTML + JS + Tailwind)
 
 - Código fuente ubicado en `frontend/www/`, estructurado para reutilizarse dentro de Cordova (`www/`).
-- Mantiene el diseño y la lógica del Taller 1, ahora parametrizado para consumir nuestras APIs o datos mock.
-- **Configuración:** `frontend/www/js/config.js` define el modo y las URLs base:
+- Mantiene el diseño y la lógica del Taller 1, consumiendo **solo** nuestras APIs propias.
+- **Configuración:** `frontend/www/js/config.js` define las URLs base de las APIs:
   ```js
-  var MODE = 'public' // 'public' | 'local' | 'mock'
   var BASE_URL_POKEMON = 'http://localhost:3000'
   var BASE_URL_COUNTRIES = 'http://localhost:4000'
   var BASE_URL_FASTAPI = 'http://localhost:8000'
   ```
-- El encabezado muestra y permite cambiar el modo de datos (APIs públicas/locales/mocks), recordando la última selección.
 - Consulta `frontend/README.md` para instrucciones específicas (Docker, servidores estáticos, Cordova).
-- Consulta `docs/backend-contracts.md` para implementar las APIs con el contrato correcto.
-- El modo se puede cambiar también vía `?mode=mock` o `?mode=local` en la URL, útil para demos.
+- Consulta `docs/backend-contracts.md` para el detalle de los contratos de cada API.
 - Requiere Node.js >= 16 para ejecutar los scripts opcionales (`npm run sync-www`).
-- Los datos de ejemplo para `MODE='mock'` están en `frontend/www/mock/`.
 
 ---
 
-## Tecnologías a utilizar:
+## Tecnologías a utilizar
 
 ### Frontend
 
@@ -101,54 +152,21 @@ La app mantiene las mismas funcionalidades del Taller 1 (Pokémon, países, clim
 
 ---
 
-## Estructura del Repositorio de momento
+## Estructura del repositorio
 
 ```text
 infomovil-taller2/
 ├── backend/
 │   ├── express/
-│   │   └── Dockerfile
 │   ├── fastapi/
-│   │   └── Dockerfile
-│   ├── nest/
-│   │   └── Dockerfile
-│   └── README.md
+│   └── nest/
 ├── frontend/
 │   ├── Dockerfile
 │   ├── README.md
 │   └── www/
 │       ├── index.html
 │       ├── styles.css
-│       ├── js/
-│       │   ├── api.js
-│       │   ├── config.js
-│       │   ├── config.sample.js
-│       │   ├── countries.js
-│       │   ├── holidays.js
-│       │   ├── main.js
-│       │   ├── pokemon.js
-│       │   ├── ui.js
-│       │   ├── utils.js
-│       │   └── weather.js
-│       └── mock/
-│           ├── countries_all.json
-│           ├── holidays_CL_2025.json
-│           ├── pokemon/
-│           │   ├── bulbasaur.json
-│           │   ├── charizard.json
-│           │   ├── charmander.json
-│           │   ├── gengar.json
-│           │   ├── ivysaur.json
-│           │   ├── mew.json
-│           │   ├── squirtle.json
-│           │   ├── pikachu.json
-│           │   └── snorlax.json
-│           │   └── venusaur.json
-│           ├── pokemon_list.json
-│           ├── weather_Calama.json
-│           ├── weather_La_Serena.json
-│           ├── weather_Santiago.json
-│           └── weather_default.json
+│       └── js/
 ├── scripts/
 │   └── sync-www.js
 ├── docs/
@@ -158,25 +176,10 @@ infomovil-taller2/
 └── README.md
 ```
 
-### Backend (pendiente)
-
-- Cada servicio tiene su carpeta dentro de `backend/` con un `Dockerfile` placeholder y documentación en `backend/README.md`.
-- Al implementar las APIs se debe actualizar ese `Dockerfile` y añadir la configuración de la base de datos correspondiente.
-- Los contenedores exponen puertos `3000`, `4000` y `8000`, que también se publican en el host.
-
 ---
 
-## Organización
-
-División de tareas y organización: https://docs.google.com/spreadsheets/d/1SS0sQna__lw2i_N7hFHYkcZuJKCjdoBD3aPRTeOkSSM/edit?gid=0#gid=0
-
-<img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/0925bbb5-e158-4a53-a7a7-44f48cb05083" />
-
-**Proyecto desarrollado para el curso Introducción al Desarrollo Web Móvil - Universidad Católica del Norte (UCN) 2025**
-
----
-
-Despues para Cordova:
+## Notas para Cordova / emulador
 
 - En emulador Android: usar `http://10.0.2.2:<puerto>` como host para `BASE_URL_*`.
-- En Docker: `http://host.docker.internal:<puerto>`
+- En Docker: usar `http://host.docker.internal:<puerto>` como host para `BASE_URL_*`.
+

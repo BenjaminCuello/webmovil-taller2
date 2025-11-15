@@ -69,11 +69,11 @@ function crearControles(recurso) {
       '<div class="grid grid-cols-1 md:grid-cols-3 gap-2">' +
       '<label class="flex flex-col">' +
       '<span class="text-sm text-gray-600">Código ISO-2</span>' +
-      '<input id="iso" class="border border-slate-300 rounded px-3 py-2 uppercase" placeholder="Ej: CL" maxlength="2" value="CL">' +
+      '<input id="iso" class="border border-slate-300 rounded px-3 py-2 uppercase" placeholder="Ej: CL" maxlength="2" >' +
       '</label>' +
       '<label class="flex flex-col">' +
       '<span class="text-sm text-gray-600">Año</span>' +
-      '<input id="anio" class="border border-slate-300 rounded px-3 py-2" placeholder="Ej: 2025" maxlength="4" value="2025">' +
+      '<input id="anio" class="border border-slate-300 rounded px-3 py-2" placeholder="Ej: 2025" maxlength="4" >' +
       '</label>' +
       '<button id="holi-go" type="button" class="px-4 py-2 bg-blue-600 text-white rounded">Consultar</button>' +
       '</div>' +
@@ -136,3 +136,4 @@ function cargarPaginaDetalle() {
     mostrarFeriadosActuales()
   }
 }
+

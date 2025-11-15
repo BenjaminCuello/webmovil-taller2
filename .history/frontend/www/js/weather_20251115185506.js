@@ -147,7 +147,13 @@ function cargarPaginaClima(esNuevo) {
     mostrarEstadoCarga(contenedor, 'Cargando clima de ciudades...')
     setTimeout(function () {
       contenedor.innerHTML =
-        '<h3 class="text-xl font-bold mb-4">Clima en ciudades chilenas</h3><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="clima-grid"></div>'
+        '<h3 class="text-xl font-bold mb-4">Clima en ciudades chilenas (mostrando ' +
+        (inicio + 1) +
+        '-' +
+        Math.min(fin, todasLasCiudades.length) +
+        ' de ' +
+        todasLasCiudades.length +
+        '):</h3><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="clima-grid"></div>'
       if (fin < todasLasCiudades.length) {
         contenedor.innerHTML +=
           '<div class="text-center mt-6"><button id="cargar-mas-clima" class="px-4 py-2 bg-green-600 text-white rounded">Cargar más ciudades</button></div>'
@@ -249,3 +255,4 @@ function consultarClimaEspecifico(ciudad) {
   document.getElementById('city').value = ciudad
   consultarClima()
 }
+

@@ -1,0 +1,242 @@
+[
+  {
+    "ciudad": "Santiago",
+    "latitud": 19.45083,
+    "longitud": -70.69472,
+    "temperatura": 22.5,
+    "viento": 10.6,
+    "country_code": "DO"
+  },
+  {
+    "ciudad": "Valparaíso",
+    "latitud": -33.036,
+    "longitud": -71.62963,
+    "temperatura": 14.3,
+    "viento": 8.4,
+    "country_code": "CL"
+  },
+  {
+    "ciudad": "Concepción",
+    "latitud": -36.82699,
+    "longitud": -73.04977,
+    "temperatura": 14.9,
+    "viento": 39.2,
+    "country_code": "CL"
+  },
+  {
+    "ciudad": "La Serena",
+    "latitud": -29.90591,
+    "longitud": -71.25014,
+    "temperatura": 14.9,
+    "viento": 14.6,
+    "country_code": "CL"
+  },
+  {
+    "ciudad": "Antofagasta",
+    "latitud": -23.65236,
+    "longitud": -70.3954,
+    "temperatura": 17.8,
+    "viento": 20.2,
+    "country_code": "CL"
+  },
+  {
+    "ciudad": "Temuco",
+    "latitud": -38.73965,
+    "longitud": -72.59842,
+    "temperatura": 13,
+    "viento": 17.5,
+    "country_code": "CL"
+  },
+  {
+    "ciudad": "Puerto Montt",
+    "latitud": -41.4693,
+    "longitud": -72.94237,
+    "temperatura": 14.4,
+    "viento": 19.3,
+    "country_code": "CL"
+  },
+  {
+    "ciudad": "Punta Arenas",
+    "latitud": -53.15483,
+    "longitud": -70.91129,
+    "temperatura": 8.4,
+    "viento": 41,
+    "country_code": "CL"
+  },
+  {
+    "ciudad": "Iquique",
+    "latitud": -20.21326,
+    "longitud": -70.15027,
+    "temperatura": 18.8,
+    "viento": 15.8,
+    "country_code": "CL"
+  },
+  {
+    "ciudad": "Arica",
+    "latitud": -18.4746,
+    "longitud": -70.29792,
+    "temperatura": 18.8,
+    "viento": 21.7,
+    "country_code": "CL"
+  },
+  {
+    "ciudad": "Copiapó",
+    "latitud": -27.36679,
+    "longitud": -70.3314,
+    "temperatura": 18.5,
+    "viento": 11.5,
+    "country_code": "CL"
+  },
+  {
+    "ciudad": "Ovalle",
+    "latitud": -30.60106,
+    "longitud": -71.19901,
+    "temperatura": 17.7,
+    "viento": 23.9,
+    "country_code": "CL"
+  },
+  {
+    "ciudad": "Valdivia",
+    "latitud": -39.81422,
+    "longitud": -73.24589,
+    "temperatura": 14.6,
+    "viento": 12.6,
+    "country_code": "CL"
+  },
+  {
+    "ciudad": "Osorno",
+    "latitud": -40.57395,
+    "longitud": -73.13348,
+    "temperatura": 15.9,
+    "viento": 20.6,
+    "country_code": "CL"
+  },
+  {
+    "ciudad": "Castro",
+    "latitud": 40.00702,
+    "longitud": 18.42573,
+    "temperatura": 11.1,
+    "viento": 5,
+    "country_code": "IT"
+  },
+  {
+    "ciudad": "Chillán",
+    "latitud": -36.60664,
+    "longitud": -72.10344,
+    "temperatura": 22.6,
+    "viento": 28.6,
+    "country_code": "CL"
+  },
+  {
+    "ciudad": "Talca",
+    "latitud": -35.4264,
+    "longitud": -71.65542,
+    "temperatura": 25.9,
+    "viento": 23.3,
+    "country_code": "CL"
+  },
+  {
+    "ciudad": "Curicó",
+    "latitud": -34.98279,
+    "longitud": -71.23943,
+    "temperatura": 22,
+    "viento": 20.2,
+    "country_code": "CL"
+  },
+  {
+    "ciudad": "Rancagua",
+    "latitud": -34.17083,
+    "longitud": -70.74444,
+    "temperatura": 21.6,
+    "viento": 18.1,
+    "country_code": "CL"
+  },
+  {
+    "ciudad": "Melipilla",
+    "latitud": -33.68909,
+    "longitud": -71.21528,
+    "temperatura": 18.2,
+    "viento": 17.7,
+    "country_code": "CL"
+  },
+  {
+    "ciudad": "San Antonio",
+    "latitud": 29.42412,
+    "longitud": -98.49363,
+    "temperatura": 28.8,
+    "viento": 14,
+    "country_code": "US"
+  },
+  {
+    "ciudad": "Quillota",
+    "latitud": -32.88341,
+    "longitud": -71.24882,
+    "temperatura": 16.5,
+    "viento": 11.3,
+    "country_code": "CL"
+  },
+  {
+    "ciudad": "Los Andes",
+    "latitud": -32.83369,
+    "longitud": -70.59827,
+    "temperatura": 19.5,
+    "viento": 13.4,
+    "country_code": "CL"
+  },
+  {
+    "ciudad": "Calama",
+    "latitud": -22.45667,
+    "longitud": -68.92371,
+    "temperatura": 25.2,
+    "viento": 30.5,
+    "country_code": "CL"
+  },
+  {
+    "ciudad": "Coquimbo",
+    "latitud": -29.95332,
+    "longitud": -71.33947,
+    "temperatura": 14.8,
+    "viento": 14.6,
+    "country_code": "CL"
+  },
+  {
+    "ciudad": "Viña del Mar",
+    "latitud": -33.02457,
+    "longitud": -71.55183,
+    "temperatura": 14.4,
+    "viento": 8.4,
+    "country_code": "CL"
+  },
+  {
+    "ciudad": "Coyhaique",
+    "latitud": -45.57524,
+    "longitud": -72.06619,
+    "temperatura": 10.2,
+    "viento": 33.2,
+    "country_code": "CL"
+  },
+  {
+    "ciudad": "Angol",
+    "latitud": -37.79519,
+    "longitud": -72.71636,
+    "temperatura": 19.8,
+    "viento": 20.3,
+    "country_code": "CL"
+  },
+  {
+    "ciudad": "Talcahuano",
+    "latitud": -36.72494,
+    "longitud": -73.11684,
+    "temperatura": 14.7,
+    "viento": 39.7,
+    "country_code": "CL"
+  },
+  {
+    "ciudad": "Coronel",
+    "latitud": -37.03386,
+    "longitud": -73.14019,
+    "temperatura": 15.1,
+    "viento": 39.2,
+    "country_code": "CL"
+  }
+]
