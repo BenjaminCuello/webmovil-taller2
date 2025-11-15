@@ -1,17 +1,20 @@
 # Backend Contracts
 
-Estos contratos resumen lo que el frontend espera recibir de cada API propia. Los ejemplos se basan en los mocks ubicados en `frontend/www/mock/`.
+Estos contratos resumen lo que el frontend espera recibir de cada API propia. Los ejemplos se basan en las respuestas reales de las APIs y se inspiran en las APIs p��blicas originales (PokeAPI, RestCountries, Open-Meteo, NagerDate), pero **sin depender de ellas en tiempo de ejecuci��n**.
 
-## Pokémon (NestJS)
+## Pok��mon (NestJS)
 
-- **GET `/pokemon?limit=&offset=`** → listado con estructura similar a la PokeAPI:
+- **GET `/pokemon?limit=&offset=`** ��' listado paginado con estructura similar a la PokeAPI:
   ```json
   {
-    "count": 10,
-    "results": [{ "name": "bulbasaur" }, { "name": "ivysaur" }]
+    "count": 30,
+    "results": [
+      { "name": "bulbasaur", "url": "https://pokeapi.co/api/v2/pokemon/1/" },
+      { "name": "ivysaur", "url": "https://pokeapi.co/api/v2/pokemon/2/" }
+    ]
   }
   ```
-- **GET `/pokemon/:idOrName`** → objeto con los campos utilizados por el frontend:
+- **GET `/pokemon/:idOrName`** ��' objeto con los campos utilizados por el frontend:
   ```json
   {
     "id": 25,
@@ -20,11 +23,11 @@ Estos contratos resumen lo que el frontend espera recibir de cada API propia. Lo
     "weight": 60,
     "types": [{ "slot": 1, "type": { "name": "electric" } }],
     "sprites": {
-      "front_default": "https://.../25.png",
-      "back_default": "https://.../back/25.png",
+      "front_default": "/img/pokemon/25.png",
+      "back_default": null,
       "other": {
         "official-artwork": {
-          "front_default": "https://.../official-artwork/25.png"
+          "front_default": "/img/pokemon/25_artwork.png"
         }
       }
     },
@@ -35,14 +38,17 @@ Estos contratos resumen lo que el frontend espera recibir de cada API propia. Lo
   }
   ```
 
-## Países (Express)
+## Pa��ses (Express)
 
-- **GET `/countries`** → array de países ordenables en memoria:
+- **GET `/countries`** ��' array de pa��ses ordenables en memoria:
   ```json
   [
     {
-      "name": { "common": "Chile", "official": "República de Chile" },
-      "flags": { "png": "https://flagcdn.com/w320/cl.png" },
+      "name": { "common": "Chile", "official": "Rep��blica de Chile" },
+      "flags": {
+        "png": "https://flagcdn.com/w320/cl.png",
+        "svg": "https://flagcdn.com/cl.svg"
+      },
       "region": "Americas",
       "capital": ["Santiago"],
       "population": 19116201,
@@ -50,11 +56,11 @@ Estos contratos resumen lo que el frontend espera recibir de cada API propia. Lo
     }
   ]
   ```
-- **GET `/countries/search?name=Chile`** → mismo arreglo filtrado por `name.common` (case-insensitive).
+- **GET `/countries/search?name=Chile`** ��' mismo arreglo filtrado por `name.common` (case-insensitive).
 
 ## Clima y feriados (FastAPI)
 
-- **GET `/weather?city=Coquimbo`** →
+- **GET `/weather?city=Coquimbo`** ��'
   ```json
   {
     "coordenadas": {
@@ -71,16 +77,21 @@ Estos contratos resumen lo que el frontend espera recibir de cada API propia. Lo
     }
   }
   ```
-- **GET `/holidays/{countryCode}/{year}`** →
+- **GET `/holidays/{countryCode}/{year}`** ��'
   ```json
   [
-    { "date": "2025-01-01", "localName": "Año Nuevo", "name": "New Year's Day" },
-    { "date": "2025-05-01", "localName": "Día del Trabajador", "name": "Labour Day" }
+    { "date": "2025-01-01", "localName": "A��o Nuevo", "name": "A��o Nuevo" },
+    {
+      "date": "2025-09-18",
+      "localName": "Independencia Nacional",
+      "name": "Independencia Nacional"
+    }
   ]
   ```
 
 ## Notas
 
-- Mantener los mismos nombres de campos que las APIs públicas para minimizar cambios en el frontend.
-- Las bases de datos pueden persistir estos datos con normalización propia, pero deben exponer el JSON anterior.
-- Ante errores, responder con códigos HTTP adecuados (`4xx`/`5xx`) y un cuerpo JSON `{ "message": "..." }` para que el frontend pueda informar al usuario.
+- Mantener los mismos nombres de campos que las APIs p��blicas de referencia para minimizar cambios en el frontend, pero sirviendo siempre los datos desde nuestras propias bases de datos.
+- Las bases de datos pueden persistir estos datos con normalizaci��n propia, pero deben exponer el JSON anterior.
+- Ante errores, responder con c��digos HTTP adecuados (`4xx`/`5xx`) y un cuerpo JSON `{ "message": "..." }` para que el frontend pueda informar al usuario.
+

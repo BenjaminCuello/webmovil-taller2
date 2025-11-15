@@ -1,95 +1,96 @@
 # API de Clima y Feriados (FastAPI)
 
-Este directorio contiene el backend de Python (FastAPI) para el Taller 2 de Web Móvil.
+Este directorio contiene el backend de Python (FastAPI) que expone datos de clima y feriados consumidos desde una base de datos MongoDB (MongoDB Atlas). No se llaman APIs externas en tiempo de ejecuci��n; los datos se cargan desde archivos de seed locales.
 
-Provee dos endpoints para consultar datos de clima (simulados) y feriados, consumiendo una base de datos de MongoDB.
+## Tech Stack
 
-## 🛠️ Tech Stack
-
-* Python 3.10+
-* FastAPI
-* Uvicorn
-* PyMongo (MongoDB)
+- Python 3.10+
+- FastAPI
+- Uvicorn
+- PyMongo (MongoDB)
 
 ---
 
-## 🚀 Comandos para Ejecutar
+## Ejecuci��n con Docker Compose (recomendada)
 
-### 1. Preparar Entorno
-Asegúrate de estar en esta carpeta (`backend/fastapi`).
+El servicio `fastapi` est�� integrado en el `docker-compose.yml` de la ra��z.
 
-```bash
-# 1. Crear el entorno virtual (si no existe)
-python -m venv venv
-
-# 2. Activar el entorno
-# Windows
-.\venv\Scripts\activate
-# Mac/Linux
-# source venv/bin/activate
-
-# 3. Instalar dependencias
-pip install -r requirements.txt
-```
-
-### 2. Configurar Variables
-Este proyecto requiere una `CONNECTION_STRING` de MongoDB Atlas. Debes pegarla en la variable `CONNECTION_STRING` dentro de `main.py`.
-
-### 3. Ejecutar el Servidor
-
-```bash
-uvicorn main:app --reload
-```
-El servidor estará disponible en `http://127.0.0.1:8000`.
+1. Desde la ra��z del repositorio:
+   ```bash
+   docker compose up --build
+   ```
+2. La API quedar�� disponible en `http://localhost:8000`.
 
 ---
 
-## 📚 API Endpoints
+## Ejecuci��n local
 
-La documentación interactiva completa (Swagger) está en `http://127.0.0.1:8000/docs`.
+1. Crear y activar entorno virtual (opcional):
+   ```bash
+   python -m venv venv
+   # Windows
+   .\venv\Scripts\activate
+   # Mac/Linux
+   # source venv/bin/activate
+   ```
+2. Instalar dependencias:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Configurar la cadena de conexi��n de MongoDB Atlas:
+   - Edita `CONNECTION_STRING` en `main.py` con tu URI de MongoDB Atlas.
+4. Ejecutar el servidor:
+   ```bash
+   uvicorn main:app --reload
+   ```
+   Servir�� en `http://127.0.0.1:8000`.
+
+En el evento de `startup` la API sembrar�� autom��ticamente datos de `weather-seed.json` y `holidays-seed.json` si las colecciones est��n vac��as o incompletas.
+
+---
+
+## API Endpoints
+
+La documentaci��n interactiva (Swagger) est�� en `http://localhost:8000/docs`.
 
 ### 1. GET /weather
 
 Obtiene el clima cacheado para una ciudad.
 
-* **URL:** `GET /weather`
-* **Query Param:** `city` (string, requerido)
-* **Ejemplo:** `GET http://127.0.0.1:8000/weather?city=La%20Serena`
-* **Ejemplo JSON de Respuesta (200 OK):**
-    ```json
-    {
-      "ciudad": "La Serena",
-      "latitud": -29.9045,
-      "longitud": -71.2489,
-      "temperatura": 17.8,
-      "viento": 14.2
+- **URL:** `GET /weather`
+- **Query param:** `city` (string, requerido)
+- **Ejemplo:** `GET http://localhost:8000/weather?city=Coquimbo`
+- **Ejemplo de respuesta (200 OK):**
+  ```json
+  {
+    "coordenadas": {
+      "name": "Coquimbo",
+      "country_code": "CL",
+      "latitude": -29.95,
+      "longitude": -71.34
+    },
+    "clima": {
+      "current": {
+        "temperature_2m": 16.4,
+        "wind_speed_10m": 5.1
+      }
     }
-    ```
+  }
+  ```
 
-### 2. GET /holidays
+### 2. GET /holidays/{countryCode}/{year}
 
-Obtiene los feriados para un país y año.
+Obtiene los feriados para un pa��s y a��o.
 
-* **URL:** `GET /holidays/{countryCode}/{year}`
-* **Ejemplo:** `GET http://127.0.0.1:8000/holidays/CL/2025`
-* **Ejemplo JSON de Respuesta (200 OK):**
-    ```json
-    {
-      "pais": "CL",
-      "año": 2025,
-      "feriados": [
-        {
-          "fecha": "2025-01-01",
-          "nombre": "Año Nuevo"
-        },
-        {
-          "fecha": "2025-09-18",
-          "nombre": "Independencia Nacional"
-        },
-        {
-          "fecha": "2025-12-25",
-          "nombre": "Navidad"
-        }
-      ]
-    }
-    ```
+- **URL:** `GET /holidays/{countryCode}/{year}`
+- **Ejemplo:** `GET http://localhost:8000/holidays/CL/2025`
+- **Ejemplo de respuesta (200 OK):**
+  ```json
+  [
+    { "date": "2025-01-01", "localName": "A��o Nuevo", "name": "A��o Nuevo" },
+    { "date": "2025-09-18", "localName": "Independencia Nacional", "name": "Independencia Nacional" }
+  ]
+  ```
+
+Los nombres y fechas concretas dependen de los datos semilla definidos en `holidays-seed.json`.
+

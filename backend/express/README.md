@@ -1,51 +1,67 @@
-# API de Países - Express.js
+# API de Pa��ses - Express.js
 
-Esta API proporciona datos de países y está construida con Express.js y PostgreSQL.
+Esta API proporciona datos de pa��ses y est�� construida con Express.js y PostgreSQL. Los datos provienen de `database.sql` / `countries-seed.json` y **no** llama a RestCountries en tiempo de ejecuci��n.
 
-## Ejecución
+## Ejecuci��n con Docker Compose (recomendada)
+
+El servicio `express` y la base de datos `postgres-db` est��n definidos en `docker-compose.yml` en la ra��z.
+
+1. Desde la ra��z del repositorio:
+   ```bash
+   docker compose up --build
+   ```
+2. La API quedar�� disponible en `http://localhost:4000`.
+
+La base de datos se inicializa autom��ticamente con `backend/express/database.sql` y, al arrancar `server.js`, se comprueba que existan al menos 30 pa��ses; si no, se vuelven a insertar desde `countries-seed.json`.
+
+---
+
+## Ejecuci��n local (sin Docker)
 
 ### 1. Requisitos
 
 - Node.js
-- PostgreSQL
+- PostgreSQL ejecut��ndose en tu m��quina
 
-### 2. Configuración de la Base de Datos
+### 2. Configuraci��n de la base de datos
 
-1.  Crea una base de datos en PostgreSQL (p. ej., `countries_db`).
-2.  Ejecuta el script `database.sql` para crear la tabla `countries` e insertar los datos de ejemplo.
-3.  Configura la conexión a la base de datos. El `db.js` utiliza variables de entorno. Puedes crear un archivo `.env` o exportarlas en tu terminal:
-    ```bash
-    export PGUSER=tu_usuario
-    export PGHOST=localhost
-    export PGDATABASE=countries_db
-    export PGPASSWORD=tu_contraseña
-    export PGPORT=5432
-    ```
+1. Crea una base de datos (p. ej. `countries_db`).
+2. Ejecuta `backend/express/database.sql` para crear la tabla `countries` e insertar los datos de ejemplo.
+3. Configura las variables de entorno usadas por `pg` (`db.js`):
+   ```bash
+   export PGUSER=tu_usuario
+   export PGHOST=localhost
+   export PGDATABASE=countries_db
+   export PGPASSWORD=tu_contrase��a
+   export PGPORT=5432
+   ```
 
-### 3. Iniciar el Servidor
+### 3. Iniciar el servidor
 
 ```bash
-# Instalar dependencias
 npm install
-
-# Iniciar la API en modo de desarrollo
 node server.js
 ```
 
-La API estará disponible en `http://localhost:4000`.
+La API quedar�� disponible en `http://localhost:4000`.
+
+---
 
 ## Endpoints
 
 ### `GET /countries`
 
-Devuelve una lista de todos los países almacenados.
+Devuelve una lista de todos los pa��ses almacenados.
 
 **Respuesta de ejemplo:**
 ```json
 [
   {
     "name": { "common": "Argentina", "official": "Argentine Republic" },
-    "flags": { "png": "https://flagcdn.com/w320/ar.png", "svg": "https://flagcdn.com/ar.svg" },
+    "flags": {
+      "png": "https://flagcdn.com/w320/ar.png",
+      "svg": "https://flagcdn.com/ar.svg"
+    },
     "region": "Americas",
     "capital": ["Buenos Aires"],
     "population": 45376763,
@@ -56,7 +72,7 @@ Devuelve una lista de todos los países almacenados.
 
 ### `GET /countries/search?name=<nombre>`
 
-Busca países cuyo nombre común contenga el texto proporcionado (case-insensitive).
+Busca pa��ses cuyo `name.common` contenga el texto proporcionado (b��squeda case-insensitive).
 
 **Ejemplo:** `http://localhost:4000/countries/search?name=chile`
 
@@ -65,7 +81,10 @@ Busca países cuyo nombre común contenga el texto proporcionado (case-insensiti
 [
   {
     "name": { "common": "Chile", "official": "Republic of Chile" },
-    "flags": { "png": "https://flagcdn.com/w320/cl.png", "svg": "https://flagcdn.com/cl.svg" },
+    "flags": {
+      "png": "https://flagcdn.com/w320/cl.png",
+      "svg": "https://flagcdn.com/cl.svg"
+    },
     "region": "Americas",
     "capital": ["Santiago"],
     "population": 19116201,
@@ -74,10 +93,3 @@ Busca países cuyo nombre común contenga el texto proporcionado (case-insensiti
 ]
 ```
 
-## Docker
-
-Para levantar el servicio con Docker, asegúrate de que el servicio `postgres` esté disponible y configura las variables de entorno en tu `docker-compose.yml` si es necesario. Luego, ejecuta:
-
-```bash
-docker-compose up express --build
-```

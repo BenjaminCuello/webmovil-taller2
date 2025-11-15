@@ -45,11 +45,11 @@ La app mantiene las mismas funcionalidades del Taller 1 (Pokémon, países, clim
       "weight": 60,
       "types": [{ "slot": 1, "type": { "name": "electric" } }],
       "sprites": {
-        "front_default": "https://.../25.png",
+        "front_default": "/img/pokemon/25.png",
         "back_default": null,
         "other": {
           "official-artwork": {
-            "front_default": "https://.../official-artwork/25.png"
+            "front_default": "/img/pokemon/25_artwork.png"
           }
         }
       },
@@ -178,8 +178,24 @@ infomovil-taller2/
 
 ---
 
+## Ejecuci��n con Docker Compose
+
+1. Desde la ra��z del repositorio:
+   ```bash
+   docker compose up --build
+   ```
+2. Servicios expuestos (por defecto):
+   - Frontend: `http://localhost:8080`
+   - API Pok��mon (NestJS): `http://localhost:3000`
+   - API Pa��ses (Express): `http://localhost:4000`
+   - API Clima y Feriados (FastAPI): `http://localhost:8000`
+3. Bases de datos:
+   - NestJS y Express se conectan al contenedor PostgreSQL `postgres-db` definido en `docker-compose.yml` (se inicializa con `backend/express/database.sql`).
+   - FastAPI se conecta a una base de datos MongoDB Atlas usando la `CONNECTION_STRING` configurada en `backend/fastapi/main.py`.
+
+---
+
 ## Notas para Cordova / emulador
 
 - En emulador Android: usar `http://10.0.2.2:<puerto>` como host para `BASE_URL_*`.
 - En Docker: usar `http://host.docker.internal:<puerto>` como host para `BASE_URL_*`.
-
