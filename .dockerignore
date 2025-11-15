@@ -1,0 +1,17 @@
+# Git
+.git
+.gitignore
+
+# Editor/IDE configuration
+.idea
+.vscode
+*.swp
+*.sublime-workspace
+
+# Node
+node_modules
+npm-debug.log
+
+# OS files
+.DS_Store
+Thumbs.db

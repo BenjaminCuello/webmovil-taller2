@@ -1,0 +1,16 @@
+# Archivos de sistema operativo
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+node_modules/
+
+.idea/
+.vscode/
+*.swp
+
+# Archivos de entorno
+.env

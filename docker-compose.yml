@@ -15,7 +15,32 @@ services:
     build: ./backend/express
     ports:
       - "4000:4000"
+    depends_on:
+      - postgres-db
+    environment:
+      # Variables para que la API se conecte a la BD dentro de Docker
+      - PGHOST=postgres-db
+      - PGUSER=postgres
+      - PGPASSWORD=mysecretpassword
+      - PGDATABASE=countries_db
+      - PGPORT=5432
   fastapi:
     build: ./backend/fastapi
     ports:
       - "8000:8000"
+
+  postgres-db:
+    image: postgres:13-alpine
+    container_name: taller2-postgres-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_DB=countries_db 
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  # Este volumen asegura que los datos de la BD no se borren
+  postgres_data:
