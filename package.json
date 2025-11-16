@@ -2,9 +2,10 @@
   "name": "infomovil-taller2",
   "private": true,
   "version": "1.0.0",
-  "description": "Frontend y utilidades para el Taller 2 - InfoMóvil",
+  "description": "Frontend y utilidades para el Taller 2 - InfoM��vil",
   "scripts": {
-    "sync-www": "node scripts/sync-www.js"
+    "sync-www": "node scripts/sync-www.js",
+    "sync-www:cordova": "node scripts/sync-www.js --target ./cordova/www"
   }
 }
 

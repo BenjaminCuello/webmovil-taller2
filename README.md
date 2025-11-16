@@ -199,3 +199,60 @@ infomovil-taller2/
 
 - En emulador Android: usar `http://10.0.2.2:<puerto>` como host para `BASE_URL_*`.
 - En Docker: usar `http://host.docker.internal:<puerto>` como host para `BASE_URL_*`.
+
+---
+
+## Cordova y APK Android
+
+Esta secci��n resume c��mo integrar el frontend de InfoM��vil en un proyecto Cordova (incluido en `cordova/`) y generar un APK Android en tu propio equipo.
+
+### Requisitos previos
+
+- Node.js + npm instalados.
+- Cordova CLI:
+  ```bash
+  npm install -g cordova
+  ```
+- Java JDK y Android SDK (por ejemplo, mediante Android Studio), con variables de entorno configuradas seg��n tu sistema operativo.
+
+### Preparar el proyecto Cordova (primera vez)
+
+1. Desde la ra��z del repositorio, sincroniza el frontend hacia Cordova:
+   ```bash
+   npm run sync-www:cordova
+   ```
+   Esto copia `frontend/www` a `cordova/www`.
+2. Entra a la carpeta Cordova:
+   ```bash
+   cd cordova
+   ```
+3. A��adir la plataforma Android (solo la primera vez):
+   ```bash
+   cordova platform add android
+   ```
+
+### Sincronizar el frontend con Cordova (cada vez que cambies el frontend)
+
+1. Volver a la ra��z del repositorio (si est��s dentro de `cordova/`):
+   ```bash
+   cd ..
+   ```
+2. Ejecutar la sincronizaci��n:
+   ```bash
+   npm run sync-www:cordova
+   ```
+   Esto limpiar�� y volver�� a copiar el contenido de `frontend/www` dentro de `cordova/www`.
+
+### Generar el APK Android
+
+1. Desde la carpeta `cordova/`:
+   ```bash
+   cd cordova
+   cordova build android
+   ```
+2. Una vez completado el build, el APK de debug se encontrar�� (t��picamente) en:
+   ```text
+   cordova/platforms/android/app/build/outputs/apk/debug/app-debug.apk
+   ```
+
+Ese archivo `app-debug.apk` es el que debes usar para pruebas en emulador/dispositivo y para la entrega del Taller (por ejemplo, subirlo al Campus).
