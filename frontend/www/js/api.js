@@ -1,17 +1,41 @@
 function _fetchJSON(url, options) {
-  return fetch(url, options).then(function (r) {
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    return r.json();
-  });
+  if (typeof window.debugLog === 'function') {
+    window.debugLog('fetch:start', { url: url })
+  }
+  return fetch(url, options)
+    .then(function (r) {
+      if (!r.ok) {
+        if (typeof window.debugLog === 'function') {
+          window.debugLog('fetch:http_error', { url: url, status: r.status })
+        }
+        if (typeof mostrarToast === 'function') {
+          mostrarToast('error', 'HTTP ' + r.status + ' en ' + url, 3000)
+        }
+        throw new Error('HTTP ' + r.status)
+      }
+      return r.json()
+    })
+    .catch(function (error) {
+      if (typeof window.debugLog === 'function') {
+        window.debugLog('fetch:fail', {
+          url: url,
+          error: String((error && error.message) || error),
+        })
+      }
+      if (typeof mostrarToast === 'function') {
+        mostrarToast('error', 'Error de red o parseo en ' + url, 3000)
+      }
+      throw error
+    })
 }
 
-// POKÉMON - API NestJS local
+// POK�MON - API NestJS local
 function obtenerPokemon(nombreOId) {
-  var url =
-    BASE_URL_POKEMON.replace(/\/$/, '') + '/pokemon/' + encodeURIComponent(nombreOId);
-  return _fetchJSON(url).catch(function () {
-    throw new Error('Pokémon no encontrado');
-  });
+  var url = BASE_URL_POKEMON.replace(/\/$/, '') + '/pokemon/' + encodeURIComponent(nombreOId)
+  return _fetchJSON(url).catch(function (error) {
+    console.error('[api] Error en obtenerPokemon', url, error)
+    throw new Error('Pok�mon no encontrado')
+  })
 }
 
 function obtenerListaPokemon(limite, desde) {
@@ -20,36 +44,38 @@ function obtenerListaPokemon(limite, desde) {
     '/pokemon?limit=' +
     encodeURIComponent(limite) +
     '&offset=' +
-    encodeURIComponent(desde);
-  return _fetchJSON(url).catch(function () {
-    throw new Error('No se pudo obtener la lista de Pokémon');
-  });
+    encodeURIComponent(desde)
+  return _fetchJSON(url).catch(function (error) {
+    console.error('[api] Error en obtenerListaPokemon', url, error)
+    throw new Error('No se pudo obtener la lista de Pok�mon')
+  })
 }
 
-// PAÍSES - API Express local
+// PA�SES - API Express local
 function obtenerPais(nombre) {
   var url =
-    BASE_URL_COUNTRIES.replace(/\/$/, '') +
-    '/countries/search?name=' +
-    encodeURIComponent(nombre);
-  return _fetchJSON(url).catch(function () {
-    throw new Error('País no encontrado');
-  });
+    BASE_URL_COUNTRIES.replace(/\/$/, '') + '/countries/search?name=' + encodeURIComponent(nombre)
+  return _fetchJSON(url).catch(function (error) {
+    console.error('[api] Error en obtenerPais', url, error)
+    throw new Error('Pa�s no encontrado')
+  })
 }
 
 function obtenerTodosPaises() {
-  var url = BASE_URL_COUNTRIES.replace(/\/$/, '') + '/countries';
-  return _fetchJSON(url).catch(function () {
-    throw new Error('No se pudo obtener la lista de países');
-  });
+  var url = BASE_URL_COUNTRIES.replace(/\/$/, '') + '/countries'
+  return _fetchJSON(url).catch(function (error) {
+    console.error('[api] Error en obtenerTodosPaises', url, error)
+    throw new Error('No se pudo obtener la lista de pa�ses')
+  })
 }
 
 // CLIMA - API FastAPI local
 function obtenerClima(ciudad) {
-  var url = BASE_URL_FASTAPI.replace(/\/$/, '') + '/weather?city=' + encodeURIComponent(ciudad);
-  return _fetchJSON(url).catch(function () {
-    throw new Error('No se pudo obtener la información del clima');
-  });
+  var url = BASE_URL_FASTAPI.replace(/\/$/, '') + '/weather?city=' + encodeURIComponent(ciudad)
+  return _fetchJSON(url).catch(function (error) {
+    console.error('[api] Error en obtenerClima', url, error)
+    throw new Error('No se pudo obtener la informaci�n del clima')
+  })
 }
 
 // FERIADOS - API FastAPI local
@@ -59,8 +85,9 @@ function obtenerFeriados(codigoPais, ano) {
     '/holidays/' +
     encodeURIComponent(String(codigoPais).toUpperCase()) +
     '/' +
-    encodeURIComponent(ano);
-  return _fetchJSON(url).catch(function () {
-    throw new Error('No se pudieron obtener los feriados');
-  });
+    encodeURIComponent(ano)
+  return _fetchJSON(url).catch(function (error) {
+    console.error('[api] Error en obtenerFeriados', url, error)
+    throw new Error('No se pudieron obtener los feriados')
+  })
 }

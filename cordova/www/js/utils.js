@@ -12,12 +12,15 @@ function marcarCargaCompleta(contenedor) {
   }
 }
 
-function obtenerElemento(selector) {
-  return document.querySelector(selector)
-}
-
 function formatearNumero(numero) {
   return numero.toLocaleString('es-CL')
+}
+
+function normalizarTextoBusquedas(texto) {
+  return (texto || '')
+    .normalize('NFD')
+    .replace(/[^\u0000-\u007E]/g, '')
+    .toLowerCase()
 }
 
 function mostrarToast(tipo, mensaje, duracion) {
@@ -60,7 +63,7 @@ function mostrarEstadoCarga(contenedor, mensaje) {
 }
 
 function mostrarError(contenedor, mensaje) {
-  var texto = mensaje || 'No se pudo cargar la información'
+  var texto = mensaje || 'No encontramos resultados para tu búsqueda'
   contenedor.innerHTML =
     '<div class="flex flex-col items-center justify-center gap-2 py-8 text-center text-rose-600">' +
     '<span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-rose-100 text-rose-600">&#9888;</span>' +

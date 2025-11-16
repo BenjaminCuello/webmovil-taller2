@@ -45,7 +45,7 @@ interface PokeApiDetail {
 function mapToPokeApiListItem(pokemon: Pokemon): PokeApiListItem {
   return {
     name: pokemon.name,
-    url: `https://pokeapi.co/api/v2/pokemon/${pokemon.id}/`,
+    url: `/pokemon/${pokemon.id}`,
   };
 }
 

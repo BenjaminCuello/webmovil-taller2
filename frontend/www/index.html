@@ -3,22 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self' data: blob: https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com; img-src 'self' data: https:; connect-src * data: blob:; media-src 'self' data:; font-src 'self' data:;"
+    />
     <title>InfoMóvil - Información dinámica desde nuestras APIs</title>
     <meta
       name="description"
       content="Aplicación web móvil responsiva que centraliza información dinámica de Pokémon, países, clima y feriados usando nuestras propias APIs."
     />
-    <meta
-      name="keywords"
-      content="pokemon, países, clima, feriados, api, web movil, responsive"
-    />
+    <meta name="keywords" content="pokemon, países, clima, feriados, api, web movil, responsive" />
     <meta
       name="author"
       content="SmartCoders - Benjamin Salas, Tomas Guerra, Bastian Salinas, Benjamin Cuello"
     />
     <link rel="stylesheet" href="styles.css" />
     <script>
-      window.tailwind = window.tailwind || {};
+      window.tailwind = window.tailwind || {}
       window.tailwind.config = {
         safelist: [
           'bg-emerald-500/15',
@@ -45,9 +46,46 @@
           'text-emerald-700',
           'border-white/60',
         ],
-      };
+      }
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Cordova inyecta este archivo en Android; en navegador puede dar 404 sin afectar la app -->
+    <script src="cordova.js"></script>
+    <script>
+      ;(function () {
+        var box
+        function ensureBox() {
+          if (box) return box
+          box = document.createElement('pre')
+          box.id = 'debug'
+          box.style.cssText =
+            'position:fixed;bottom:0;left:0;width:100%;max-height:40%;overflow:auto;background:#000;color:#0f0;font-size:10px;white-space:pre-wrap;z-index:9999;opacity:.85;padding:4px;'
+          document.addEventListener('DOMContentLoaded', function () {
+            document.body.appendChild(box)
+          })
+          return box
+        }
+        window.debugLog = function (label, data) {
+          try {
+            var el = ensureBox()
+            var line = '[' + new Date().toISOString() + '] ' + label
+            if (data !== undefined) line += ' ' + JSON.stringify(data)
+            el.textContent += line + '\n'
+          } catch (e) {}
+        }
+        window.addEventListener('error', function (evt) {
+          window.debugLog('window.onerror', {
+            message: evt.message,
+            filename: evt.filename,
+            lineno: evt.lineno,
+          })
+        })
+        window.addEventListener('unhandledrejection', function (evt) {
+          window.debugLog('unhandledrejection', { reason: String(evt.reason) })
+        })
+        window.debugLog('index.html cargado')
+      })()
+    </script>
   </head>
 
   <body class="min-h-screen bg-slate-100 text-slate-900">
@@ -88,9 +126,7 @@
             <h3 class="text-lg font-semibold">Pokémon</h3>
             <span class="text-xs uppercase text-blue-600">API</span>
           </header>
-          <p class="text-sm text-gray-600">
-            Personajes destacados con imagen y número de Pokédex
-          </p>
+          <p class="text-sm text-gray-600">Personajes destacados con imagen y número de Pokédex</p>
           <div
             id="contenedor-pokemon"
             class="tarjeta-datos text-sm text-gray-600"
@@ -103,42 +139,42 @@
             data-recurso="pokemon"
             href="#"
             aria-label="Ver detalles de Pokémon"
-            >Ver más</a
-          >
-        </article>
-
-        <article class="tarjeta">
-          <header class="flex items-center justify-between">
-            <h3 class="text-lg font-semibold">Países</h3>
-            <span class="text-xs uppercase text-blue-600">API</span>
+            <script>
+              (function(){
+                try {
+                  var show = (localStorage.getItem('DEBUG_OVERLAY') === '1');
+                  if (!show) { window.debugLog = function(){}; return; }
+                } catch(e) {}
+                var box;
+                function ensureBox(){
+                  if (box) return box;
+                  box = document.createElement('pre');
+                  box.id = 'debug';
+                  box.style.cssText = 'position:fixed;bottom:0;left:0;width:100%;max-height:40%;overflow:auto;background:#000;color:#0f0;font-size:10px;white-space:pre-wrap;z-index:9999;opacity:.85;padding:4px;';
+                  document.addEventListener('DOMContentLoaded', function(){
+                    document.body.appendChild(box);
+                  });
+                  return box;
+                }
+                window.debugLog = function(label, data){
+                  try{
+                    var el = ensureBox();
+                    var line = '[' + new Date().toISOString() + '] ' + label;
+                    if (data !== undefined) line += ' ' + JSON.stringify(data);
+                    el.textContent += line + '\n';
+                  }catch(e){}
+                }
+                window.addEventListener('error', function(evt){
+                  window.debugLog('window.onerror', {message: evt.message, filename: evt.filename, lineno: evt.lineno});
+                });
+                window.addEventListener('unhandledrejection', function(evt){
+                  window.debugLog('unhandledrejection', {reason: String(evt.reason)});
+                });
+                window.debugLog('index.html cargado');
+              })();
+            </script>
           </header>
-          <p class="text-sm text-gray-600">
-            Información básica de países y regiones del mundo
-          </p>
-          <div
-            id="contenedor-paises"
-            class="tarjeta-datos text-sm text-gray-600"
-            aria-live="polite"
-          >
-            <p class="text-gray-400">Cargando...</p>
-          </div>
-          <a
-            class="tarjeta-enlace ir-detalle"
-            data-recurso="paises"
-            href="#"
-            aria-label="Ver detalles de países"
-            >Ver más</a
-          >
-        </article>
-
-        <article class="tarjeta">
-          <header class="flex items-center justify-between">
-            <h3 class="text-lg font-semibold">Clima</h3>
-            <span class="text-xs uppercase text-blue-600">API</span>
-          </header>
-          <p class="text-sm text-gray-600">
-            Temperatura y viento actuales en distintas ciudades
-          </p>
+          <p class="text-sm text-gray-600">Temperatura y viento actuales en distintas ciudades</p>
           <div id="contenedor-clima" class="tarjeta-datos text-sm text-gray-600" aria-live="polite">
             <p class="text-gray-400">Cargando...</p>
           </div>
@@ -156,9 +192,7 @@
             <h3 class="text-lg font-semibold">Feriados</h3>
             <span class="text-xs uppercase text-blue-600">API</span>
           </header>
-          <p class="text-sm text-gray-600">
-            Listado de feriados oficiales por país y año
-          </p>
+          <p class="text-sm text-gray-600">Listado de feriados oficiales por país y año</p>
           <div
             id="contenedor-feriados"
             class="tarjeta-datos text-sm text-gray-600"

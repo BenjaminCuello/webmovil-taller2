@@ -6,8 +6,8 @@
     "region": "Asia",
     "capital": "Kabul",
     "population": 43844000,
-    "flag_png": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Flag_of_the_Taliban.svg/320px-Flag_of_the_Taliban.svg.png",
-    "flag_svg": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_the_Taliban.svg"
+    "flag_png": "/img/flags/af.png",
+    "flag_svg": "/img/flags/af.png"
   },
   {
     "common_name": "Åland Islands",
@@ -16,8 +16,8 @@
     "region": "Europe",
     "capital": "Mariehamn",
     "population": 30654,
-    "flag_png": "https://flagcdn.com/w320/ax.png",
-    "flag_svg": "https://flagcdn.com/ax.svg"
+    "flag_png": "/img/flags/ax.png",
+    "flag_svg": "/img/flags/ax.png"
   },
   {
     "common_name": "Albania",
@@ -26,8 +26,8 @@
     "region": "Europe",
     "capital": "Tirana",
     "population": 2363314,
-    "flag_png": "https://flagcdn.com/w320/al.png",
-    "flag_svg": "https://flagcdn.com/al.svg"
+    "flag_png": "/img/flags/al.png",
+    "flag_svg": "/img/flags/al.png"
   },
   {
     "common_name": "Algeria",
@@ -36,8 +36,8 @@
     "region": "Africa",
     "capital": "Algiers",
     "population": 47400000,
-    "flag_png": "https://flagcdn.com/w320/dz.png",
-    "flag_svg": "https://flagcdn.com/dz.svg"
+    "flag_png": "/img/flags/dz.png",
+    "flag_svg": "/img/flags/dz.png"
   },
   {
     "common_name": "American Samoa",
@@ -46,8 +46,8 @@
     "region": "Oceania",
     "capital": "Pago Pago",
     "population": 49710,
-    "flag_png": "https://flagcdn.com/w320/as.png",
-    "flag_svg": "https://flagcdn.com/as.svg"
+    "flag_png": "/img/flags/as.png",
+    "flag_svg": "/img/flags/as.png"
   },
   {
     "common_name": "Andorra",
@@ -56,8 +56,8 @@
     "region": "Europe",
     "capital": "Andorra la Vella",
     "population": 88406,
-    "flag_png": "https://flagcdn.com/w320/ad.png",
-    "flag_svg": "https://flagcdn.com/ad.svg"
+    "flag_png": "/img/flags/ad.png",
+    "flag_svg": "/img/flags/ad.png"
   },
   {
     "common_name": "Angola",
@@ -66,8 +66,8 @@
     "region": "Africa",
     "capital": "Luanda",
     "population": 36170961,
-    "flag_png": "https://flagcdn.com/w320/ao.png",
-    "flag_svg": "https://flagcdn.com/ao.svg"
+    "flag_png": "/img/flags/ao.png",
+    "flag_svg": "/img/flags/ao.png"
   },
   {
     "common_name": "Anguilla",
@@ -76,8 +76,8 @@
     "region": "Americas",
     "capital": "The Valley",
     "population": 16010,
-    "flag_png": "https://flagcdn.com/w320/ai.png",
-    "flag_svg": "https://flagcdn.com/ai.svg"
+    "flag_png": "/img/flags/ai.png",
+    "flag_svg": "/img/flags/ai.png"
   },
   {
     "common_name": "Antarctica",
@@ -86,8 +86,8 @@
     "region": "Antarctic",
     "capital": null,
     "population": 1300,
-    "flag_png": "https://flagcdn.com/w320/aq.png",
-    "flag_svg": "https://flagcdn.com/aq.svg"
+    "flag_png": "/img/flags/aq.png",
+    "flag_svg": "/img/flags/aq.png"
   },
   {
     "common_name": "Antigua and Barbuda",
@@ -96,8 +96,8 @@
     "region": "Americas",
     "capital": "Saint John's",
     "population": 103603,
-    "flag_png": "https://flagcdn.com/w320/ag.png",
-    "flag_svg": "https://flagcdn.com/ag.svg"
+    "flag_png": "/img/flags/ag.png",
+    "flag_svg": "/img/flags/ag.png"
   },
   {
     "common_name": "Argentina",
@@ -106,8 +106,8 @@
     "region": "Americas",
     "capital": "Buenos Aires",
     "population": 46735004,
-    "flag_png": "https://flagcdn.com/w320/ar.png",
-    "flag_svg": "https://flagcdn.com/ar.svg"
+    "flag_png": "/img/flags/ar.png",
+    "flag_svg": "/img/flags/ar.png"
   },
   {
     "common_name": "Armenia",
@@ -116,8 +116,8 @@
     "region": "Asia",
     "capital": "Yerevan",
     "population": 3076200,
-    "flag_png": "https://flagcdn.com/w320/am.png",
-    "flag_svg": "https://flagcdn.com/am.svg"
+    "flag_png": "/img/flags/am.png",
+    "flag_svg": "/img/flags/am.png"
   },
   {
     "common_name": "Aruba",
@@ -126,8 +126,8 @@
     "region": "Americas",
     "capital": "Oranjestad",
     "population": 107566,
-    "flag_png": "https://flagcdn.com/w320/aw.png",
-    "flag_svg": "https://flagcdn.com/aw.svg"
+    "flag_png": "/img/flags/aw.png",
+    "flag_svg": "/img/flags/aw.png"
   },
   {
     "common_name": "Australia",
@@ -136,8 +136,8 @@
     "region": "Oceania",
     "capital": "Canberra",
     "population": 27536874,
-    "flag_png": "https://flagcdn.com/w320/au.png",
-    "flag_svg": "https://flagcdn.com/au.svg"
+    "flag_png": "/img/flags/au.png",
+    "flag_svg": "/img/flags/au.png"
   },
   {
     "common_name": "Austria",
@@ -146,8 +146,8 @@
     "region": "Europe",
     "capital": "Vienna",
     "population": 9200931,
-    "flag_png": "https://flagcdn.com/w320/at.png",
-    "flag_svg": "https://flagcdn.com/at.svg"
+    "flag_png": "/img/flags/at.png",
+    "flag_svg": "/img/flags/at.png"
   },
   {
     "common_name": "Azerbaijan",
@@ -156,8 +156,8 @@
     "region": "Asia",
     "capital": "Baku",
     "population": 10241722,
-    "flag_png": "https://flagcdn.com/w320/az.png",
-    "flag_svg": "https://flagcdn.com/az.svg"
+    "flag_png": "/img/flags/az.png",
+    "flag_svg": "/img/flags/az.png"
   },
   {
     "common_name": "Bahamas",
@@ -166,8 +166,8 @@
     "region": "Americas",
     "capital": "Nassau",
     "population": 398165,
-    "flag_png": "https://flagcdn.com/w320/bs.png",
-    "flag_svg": "https://flagcdn.com/bs.svg"
+    "flag_png": "/img/flags/bs.png",
+    "flag_svg": "/img/flags/bs.png"
   },
   {
     "common_name": "Bahrain",
@@ -176,8 +176,8 @@
     "region": "Asia",
     "capital": "Manama",
     "population": 1594654,
-    "flag_png": "https://flagcdn.com/w320/bh.png",
-    "flag_svg": "https://flagcdn.com/bh.svg"
+    "flag_png": "/img/flags/bh.png",
+    "flag_svg": "/img/flags/bh.png"
   },
   {
     "common_name": "Bangladesh",
@@ -186,8 +186,8 @@
     "region": "Asia",
     "capital": "Dhaka",
     "population": 169828911,
-    "flag_png": "https://flagcdn.com/w320/bd.png",
-    "flag_svg": "https://flagcdn.com/bd.svg"
+    "flag_png": "/img/flags/bd.png",
+    "flag_svg": "/img/flags/bd.png"
   },
   {
     "common_name": "Barbados",
@@ -196,8 +196,8 @@
     "region": "Americas",
     "capital": "Bridgetown",
     "population": 267800,
-    "flag_png": "https://flagcdn.com/w320/bb.png",
-    "flag_svg": "https://flagcdn.com/bb.svg"
+    "flag_png": "/img/flags/bb.png",
+    "flag_svg": "/img/flags/bb.png"
   },
   {
     "common_name": "Belarus",
@@ -206,8 +206,8 @@
     "region": "Europe",
     "capital": "Minsk",
     "population": 9109280,
-    "flag_png": "https://flagcdn.com/w320/by.png",
-    "flag_svg": "https://flagcdn.com/by.svg"
+    "flag_png": "/img/flags/by.png",
+    "flag_svg": "/img/flags/by.png"
   },
   {
     "common_name": "Belgium",
@@ -216,8 +216,8 @@
     "region": "Europe",
     "capital": "Brussels",
     "population": 11825551,
-    "flag_png": "https://flagcdn.com/w320/be.png",
-    "flag_svg": "https://flagcdn.com/be.svg"
+    "flag_png": "/img/flags/be.png",
+    "flag_svg": "/img/flags/be.png"
   },
   {
     "common_name": "Belize",
@@ -226,8 +226,8 @@
     "region": "Americas",
     "capital": "Belmopan",
     "population": 417634,
-    "flag_png": "https://flagcdn.com/w320/bz.png",
-    "flag_svg": "https://flagcdn.com/bz.svg"
+    "flag_png": "/img/flags/bz.png",
+    "flag_svg": "/img/flags/bz.png"
   },
   {
     "common_name": "Benin",
@@ -236,8 +236,8 @@
     "region": "Africa",
     "capital": "Porto-Novo",
     "population": 13224860,
-    "flag_png": "https://flagcdn.com/w320/bj.png",
-    "flag_svg": "https://flagcdn.com/bj.svg"
+    "flag_png": "/img/flags/bj.png",
+    "flag_svg": "/img/flags/bj.png"
   },
   {
     "common_name": "Bermuda",
@@ -246,8 +246,8 @@
     "region": "Americas",
     "capital": "Hamilton",
     "population": 64055,
-    "flag_png": "https://flagcdn.com/w320/bm.png",
-    "flag_svg": "https://flagcdn.com/bm.svg"
+    "flag_png": "/img/flags/bm.png",
+    "flag_svg": "/img/flags/bm.png"
   },
   {
     "common_name": "Bhutan",
@@ -256,8 +256,8 @@
     "region": "Asia",
     "capital": "Thimphu",
     "population": 784043,
-    "flag_png": "https://flagcdn.com/w320/bt.png",
-    "flag_svg": "https://flagcdn.com/bt.svg"
+    "flag_png": "/img/flags/bt.png",
+    "flag_svg": "/img/flags/bt.png"
   },
   {
     "common_name": "Bolivia",
@@ -266,8 +266,8 @@
     "region": "Americas",
     "capital": "Sucre",
     "population": 11365333,
-    "flag_png": "https://flagcdn.com/w320/bo.png",
-    "flag_svg": "https://flagcdn.com/bo.svg"
+    "flag_png": "/img/flags/bo.png",
+    "flag_svg": "/img/flags/bo.png"
   },
   {
     "common_name": "Bosnia and Herzegovina",
@@ -276,8 +276,8 @@
     "region": "Europe",
     "capital": "Sarajevo",
     "population": 3422000,
-    "flag_png": "https://flagcdn.com/w320/ba.png",
-    "flag_svg": "https://flagcdn.com/ba.svg"
+    "flag_png": "/img/flags/ba.png",
+    "flag_svg": "/img/flags/ba.png"
   },
   {
     "common_name": "Botswana",
@@ -286,8 +286,8 @@
     "region": "Africa",
     "capital": "Gaborone",
     "population": 2359609,
-    "flag_png": "https://flagcdn.com/w320/bw.png",
-    "flag_svg": "https://flagcdn.com/bw.svg"
+    "flag_png": "/img/flags/bw.png",
+    "flag_svg": "/img/flags/bw.png"
   },
   {
     "common_name": "Bouvet Island",
@@ -296,7 +296,7 @@
     "region": "Antarctic",
     "capital": null,
     "population": 0,
-    "flag_png": "https://flagcdn.com/w320/bv.png",
-    "flag_svg": "https://flagcdn.com/bv.svg"
+    "flag_png": "/img/flags/bv.png",
+    "flag_svg": "/img/flags/bv.png"
   }
 ]

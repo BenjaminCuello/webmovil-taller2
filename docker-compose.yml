@@ -36,6 +36,8 @@ services:
     build: ./backend/fastapi
     ports:
       - "8000:8000"
+    environment:
+      - MONGODB_URI=mongodb+srv://webmovil:taller123@cluster0.quu5kix.mongodb.net/?appName=Cluster0
 
   postgres-db:
     image: postgres:13-alpine

@@ -52,17 +52,48 @@ function buscarPais() {
   var input = document.getElementById('country-q');
   var status = document.getElementById('country-status');
   var contenedor = document.getElementById('contenedor-detalle');
-  var consulta = input.value.trim();
-  if (!consulta) {
+
+  var consultaTexto = (input.value || '').trim();
+  if (!consultaTexto) {
     status.textContent = 'Por favor ingresa el nombre de un país';
     return;
   }
+
+  var consultaNormalizada = normalizarTextoBusquedas(consultaTexto);
   status.textContent = 'Buscando...';
   mostrarEstadoCarga(contenedor);
-  obtenerPais(consulta)
-    .then(function (paises) {
-      if (!paises || !paises.length) throw new Error('No encontrado');
-      var pais = paises[0];
+
+  var promesaLista =
+    Array.isArray(todosLosPaises) && todosLosPaises.length
+      ? Promise.resolve(todosLosPaises)
+      : obtenerTodosPaises();
+
+  promesaLista
+    .then(function (listaPaises) {
+      if (!Array.isArray(listaPaises) || !listaPaises.length) {
+        status.textContent = 'No encontramos resultados para tu búsqueda';
+        mostrarError(contenedor);
+        return;
+      }
+
+      todosLosPaises = listaPaises;
+
+      var paisEncontrado = null;
+      for (var i = 0; i < listaPaises.length; i++) {
+        var nombre = (listaPaises[i].name && listaPaises[i].name.common) || '';
+        if (normalizarTextoBusquedas(nombre).indexOf(consultaNormalizada) !== -1) {
+          paisEncontrado = listaPaises[i];
+          break;
+        }
+      }
+
+      if (!paisEncontrado) {
+        status.textContent = 'No encontramos resultados para tu búsqueda';
+        mostrarError(contenedor);
+        return;
+      }
+
+      var pais = paisEncontrado;
       status.textContent = 'País encontrado: ' + pais.name.common;
       var nombreOficial =
         pais.name.official !== pais.name.common
@@ -118,8 +149,8 @@ function buscarPais() {
       marcarCargaCompleta(contenedor);
     })
     .catch(function () {
-      status.textContent = 'País no encontrado. Verifica el nombre e intenta nuevamente';
-      mostrarError(contenedor);
+      status.textContent = 'No se pudo cargar la lista de países';
+      mostrarError(contenedor, 'No se pudieron cargar los países destacados');
     });
 }
 

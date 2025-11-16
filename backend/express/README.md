@@ -1,29 +1,30 @@
-# API de Pa��ses - Express.js
+# API de Países - Express.js
 
-Esta API proporciona datos de pa��ses y est�� construida con Express.js y PostgreSQL. Los datos provienen de `database.sql` / `countries-seed.json` y **no** llama a RestCountries en tiempo de ejecuci��n.
+Esta API proporciona datos de países y está construida con Express.js y PostgreSQL. Los datos provienen de `database.sql` / `countries-seed.json` y **no** llama a RestCountries en tiempo de ejecución.
 
-## Ejecuci��n con Docker Compose (recomendada)
+## Ejecución con Docker Compose (recomendada)
 
-El servicio `express` y la base de datos `postgres-db` est��n definidos en `docker-compose.yml` en la ra��z.
+El servicio `express` y la base de datos `postgres-db` están definidos en `docker-compose.yml` en la raíz.
 
-1. Desde la ra��z del repositorio:
+1. Desde la raíz del repositorio:
    ```bash
    docker compose up --build
    ```
-2. La API quedar�� disponible en `http://localhost:4000`.
+2. La API quedará disponible en `http://localhost:4000`.
+   Por defecto escucha en el puerto `4000`, pero se puede sobreescribir con la variable de entorno `PORT`.
 
-La base de datos se inicializa autom��ticamente con `backend/express/database.sql` y, al arrancar `server.js`, se comprueba que existan al menos 30 pa��ses; si no, se vuelven a insertar desde `countries-seed.json`.
+La base de datos se inicializa automáticamente con `backend/express/database.sql` y, al arrancar `server.js`, se comprueba que existan al menos 30 países; si no, se vuelven a insertar desde `countries-seed.json`.
 
 ---
 
-## Ejecuci��n local (sin Docker)
+## Ejecución local (sin Docker)
 
 ### 1. Requisitos
 
 - Node.js
-- PostgreSQL ejecut��ndose en tu m��quina
+- PostgreSQL ejecutándose en tu máquina
 
-### 2. Configuraci��n de la base de datos
+### 2. Configuración de la base de datos
 
 1. Crea una base de datos (p. ej. `countries_db`).
 2. Ejecuta `backend/express/database.sql` para crear la tabla `countries` e insertar los datos de ejemplo.
@@ -32,7 +33,7 @@ La base de datos se inicializa autom��ticamente con `backend/express/databas
    export PGUSER=tu_usuario
    export PGHOST=localhost
    export PGDATABASE=countries_db
-   export PGPASSWORD=tu_contrase��a
+   export PGPASSWORD=tu_contraseña
    export PGPORT=5432
    ```
 
@@ -43,7 +44,7 @@ npm install
 node server.js
 ```
 
-La API quedar�� disponible en `http://localhost:4000`.
+La API quedará disponible en `http://localhost:4000`.
 
 ---
 
@@ -51,7 +52,7 @@ La API quedar�� disponible en `http://localhost:4000`.
 
 ### `GET /countries`
 
-Devuelve una lista de todos los pa��ses almacenados.
+Devuelve una lista de todos los países almacenados.
 
 **Respuesta de ejemplo:**
 ```json
@@ -72,7 +73,7 @@ Devuelve una lista de todos los pa��ses almacenados.
 
 ### `GET /countries/search?name=<nombre>`
 
-Busca pa��ses cuyo `name.common` contenga el texto proporcionado (b��squeda case-insensitive).
+Busca países cuyo `name.common` contenga el texto proporcionado (búsqueda case-insensitive).
 
 **Ejemplo:** `http://localhost:4000/countries/search?name=chile`
 

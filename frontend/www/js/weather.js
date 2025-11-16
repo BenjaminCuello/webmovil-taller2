@@ -29,22 +29,32 @@ var todasLasCiudades = [
   'Talcahuano',
   'Coronel',
   'Angol',
-]
+];
 
-var ciudadesPorPagina = 8
-var paginaActualClima = 0
+var ciudadesPorPagina = 8;
+var paginaActualClima = 0;
+
+function buscarCiudadCanonica(nombreCiudad) {
+  var normalizada = normalizarTextoBusquedas(nombreCiudad);
+  for (var i = 0; i < todasLasCiudades.length; i++) {
+    if (normalizarTextoBusquedas(todasLasCiudades[i]) === normalizada) {
+      return todasLasCiudades[i];
+    }
+  }
+  return nombreCiudad;
+}
 
 function cargarClimaLanding() {
-  var contenedor = document.getElementById('contenedor-clima')
-  if (!contenedor) return
-  var ciudades = ['Calama', 'Coquimbo', 'La Serena']
-  mostrarEstadoCarga(contenedor, 'Cargando clima...')
+  var contenedor = document.getElementById('contenedor-clima');
+  if (!contenedor) return;
+  var ciudades = ['Calama', 'Coquimbo', 'La Serena'];
+  mostrarEstadoCarga(contenedor, 'Cargando clima...');
   var promesas = ciudades.map(function (ciudad) {
     return obtenerClima(ciudad)
       .then(function (datos) {
-        var temperatura = Math.round(datos.clima.current.temperature_2m)
-        var viento = datos.clima.current.wind_speed_10m.toFixed(1)
-        var nombreCiudad = datos.coordenadas.name
+        var temperatura = Math.round(datos.clima.current.temperature_2m);
+        var viento = datos.clima.current.wind_speed_10m.toFixed(1);
+        var nombreCiudad = datos.coordenadas.name;
         return {
           nombre: nombreCiudad,
           texto:
@@ -56,49 +66,50 @@ function cargarClimaLanding() {
             '°C · ' +
             viento +
             ' m/s</span>',
-        }
+        };
       })
       .catch(function () {
-        return null
-      })
-  })
+        return null;
+      });
+  });
 
   Promise.all(promesas)
     .then(function (resultados) {
-      contenedor.innerHTML = ''
-      var exitosos = resultados.filter(Boolean)
+      contenedor.innerHTML = '';
+      var exitosos = resultados.filter(Boolean);
       if (!exitosos.length) {
-        mostrarError(contenedor, 'No se pudo cargar el clima')
-        return
+        mostrarError(contenedor, 'No se pudo cargar el clima');
+        return;
       }
       exitosos.forEach(function (item) {
-        contenedor.appendChild(crearTarjetaPequena(item.texto))
-      })
-      marcarCargaCompleta(contenedor)
+        contenedor.appendChild(crearTarjetaPequena(item.texto));
+      });
+      marcarCargaCompleta(contenedor);
     })
     .catch(function () {
-      mostrarError(contenedor, 'No se pudo cargar el clima')
-    })
+      mostrarError(contenedor, 'No se pudo cargar el clima');
+    });
 }
 
 function consultarClima() {
-  var input = document.getElementById('city')
-  var status = document.getElementById('meteo-status')
-  var contenedor = document.getElementById('contenedor-detalle')
-  var consulta = input.value.trim()
-  if (!consulta) {
-    status.textContent = 'Por favor ingresa el nombre de una ciudad'
-    return
+  var input = document.getElementById('city');
+  var status = document.getElementById('meteo-status');
+  var contenedor = document.getElementById('contenedor-detalle');
+  var consultaTexto = (input.value || '').trim();
+  if (!consultaTexto) {
+    status.textContent = 'Por favor ingresa el nombre de una ciudad';
+    return;
   }
-  status.textContent = 'Consultando...'
-  mostrarEstadoCarga(contenedor)
-  obtenerClima(consulta)
+  var ciudadConsulta = buscarCiudadCanonica(consultaTexto);
+  status.textContent = 'Consultando...';
+  mostrarEstadoCarga(contenedor);
+  obtenerClima(ciudadConsulta)
     .then(function (datos) {
-      var temperatura = Math.round(datos.clima.current.temperature_2m)
-      var viento = datos.clima.current.wind_speed_10m.toFixed(1)
-      var nombreCiudad = datos.coordenadas.name
-      var pais = datos.coordenadas.country_code || ''
-      status.textContent = 'Clima actual en ' + nombreCiudad
+      var temperatura = Math.round(datos.clima.current.temperature_2m);
+      var viento = datos.clima.current.wind_speed_10m.toFixed(1);
+      var nombreCiudad = datos.coordenadas.name;
+      var pais = datos.coordenadas.country_code || '';
+      status.textContent = 'Clima actual en ' + nombreCiudad;
       contenedor.innerHTML =
         '<div class="max-w-md mx-auto">' +
         '<div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-xl p-6 text-center">' +
@@ -124,58 +135,58 @@ function consultarClima() {
         '</div>' +
         '</div>' +
         '</div>' +
-        '</div>'
-      marcarCargaCompleta(contenedor)
+        '</div>';
+      marcarCargaCompleta(contenedor);
     })
     .catch(function () {
-      status.textContent = 'Ciudad no encontrada o error en la consulta'
-      mostrarError(contenedor, 'No se pudo cargar la información del clima')
-    })
+      status.textContent = 'No encontramos resultados para tu búsqueda';
+      mostrarError(contenedor);
+    });
 }
 
 function mostrarClimasVarios() {
-  paginaActualClima = 0
-  cargarPaginaClima(true)
+  paginaActualClima = 0;
+  cargarPaginaClima(true);
 }
 
 function cargarPaginaClima(esNuevo) {
-  var contenedor = document.getElementById('contenedor-detalle')
-  var inicio = paginaActualClima * ciudadesPorPagina
-  var fin = inicio + ciudadesPorPagina
-  var ciudadesPagina = todasLasCiudades.slice(inicio, fin)
+  var contenedor = document.getElementById('contenedor-detalle');
+  var inicio = paginaActualClima * ciudadesPorPagina;
+  var fin = inicio + ciudadesPorPagina;
+  var ciudadesPagina = todasLasCiudades.slice(inicio, fin);
   if (esNuevo) {
-    mostrarEstadoCarga(contenedor, 'Cargando clima de ciudades...')
+    mostrarEstadoCarga(contenedor, 'Cargando clima de ciudades...');
     setTimeout(function () {
       contenedor.innerHTML =
-        '<h3 class="text-xl font-bold mb-4">Clima en ciudades chilenas</h3><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="clima-grid"></div>'
+        '<h3 class="text-xl font-bold mb-4">Clima en ciudades chilenas</h3><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="clima-grid"></div>';
       if (fin < todasLasCiudades.length) {
         contenedor.innerHTML +=
-          '<div class="text-center mt-6"><button id="cargar-mas-clima" class="px-4 py-2 bg-green-600 text-white rounded">Cargar más ciudades</button></div>'
+          '<div class="text-center mt-6"><button id="cargar-mas-clima" class="px-4 py-2 bg-green-600 text-white rounded">Cargar más ciudades</button></div>';
       }
-      cargarCiudadesEnGrid(ciudadesPagina)
-    }, 500)
+      cargarCiudadesEnGrid(ciudadesPagina);
+    }, 500);
   } else {
     configurarBotonCargarMas(
       'cargar-mas-clima',
       'Cargar más ciudades',
       'Cargando...',
-      function () {}
-    )
-    cargarCiudadesEnGrid(ciudadesPagina)
+      function () {},
+    );
+    cargarCiudadesEnGrid(ciudadesPagina);
   }
 }
 
 function cargarCiudadesEnGrid(ciudades) {
-  var grid = document.getElementById('clima-grid')
-  if (!grid) return
-  var contador = 0
+  var grid = document.getElementById('clima-grid');
+  if (!grid) return;
+  var contador = 0;
   for (var i = 0; i < ciudades.length; i++) {
-    var ciudad = ciudades[i]
+    var ciudad = ciudades[i];
     obtenerClima(ciudad)
       .then(function (datos) {
-        var temperatura = Math.round(datos.clima.current.temperature_2m)
-        var viento = datos.clima.current.wind_speed_10m.toFixed(1)
-        var nombreCiudad = datos.coordenadas.name
+        var temperatura = Math.round(datos.clima.current.temperature_2m);
+        var viento = datos.clima.current.wind_speed_10m.toFixed(1);
+        var nombreCiudad = datos.coordenadas.name;
         var contenidoHtml =
           '<h4 class="font-bold mb-2">' +
           nombreCiudad +
@@ -185,30 +196,30 @@ function cargarCiudadesEnGrid(ciudades) {
           '°C</div>' +
           '<p class="text-gray-600">Viento: ' +
           viento +
-          ' m/s</p>'
+          ' m/s</p>';
         var tarjeta = crearTarjetaConBoton(
           contenidoHtml,
           'border rounded p-4 text-center bg-blue-50',
           'Ver detalles',
           (function (nombre) {
             return function () {
-              consultarClimaEspecifico(nombre)
-            }
-          })(nombreCiudad)
-        )
-        grid.appendChild(tarjeta)
-        contador++
+              consultarClimaEspecifico(nombre);
+            };
+          })(nombreCiudad),
+        );
+        grid.appendChild(tarjeta);
+        contador++;
         if (contador === ciudades.length) {
           configurarBotonCargarMas(
             'cargar-mas-clima',
             'Cargar más ciudades',
             'Cargando...',
             function () {
-              paginaActualClima++
-              var nuevoInicio = paginaActualClima * ciudadesPorPagina
-              var nuevoFin = nuevoInicio + ciudadesPorPagina
-              var contenedor = document.getElementById('contenedor-detalle')
-              var titulo = contenedor.querySelector('h3')
+              paginaActualClima++;
+              var nuevoInicio = paginaActualClima * ciudadesPorPagina;
+              var nuevoFin = nuevoInicio + ciudadesPorPagina;
+              var contenedor = document.getElementById('contenedor-detalle');
+              var titulo = contenedor.querySelector('h3');
               if (titulo) {
                 titulo.textContent =
                   'Clima en ciudades chilenas (mostrando ' +
@@ -217,35 +228,36 @@ function cargarCiudadesEnGrid(ciudades) {
                   Math.min(nuevoFin, todasLasCiudades.length) +
                   ' de ' +
                   todasLasCiudades.length +
-                  '):'
+                  '):';
               }
-              cargarPaginaClima(false)
+              cargarPaginaClima(false);
               if (nuevoFin >= todasLasCiudades.length) {
-                var boton = document.getElementById('cargar-mas-clima')
-                if (boton) boton.style.display = 'none'
+                var boton = document.getElementById('cargar-mas-clima');
+                if (boton) boton.style.display = 'none';
               }
-            }
-          )
-          marcarCargaCompleta(document.getElementById('contenedor-detalle'))
+            },
+          );
+          marcarCargaCompleta(document.getElementById('contenedor-detalle'));
         }
       })
       .catch(function () {
-        contador++
+        contador++;
         if (contador === ciudades.length) {
           configurarBotonCargarMas(
             'cargar-mas-clima',
             'Cargar más ciudades',
             'Cargando...',
-            function () {}
-          )
-          mostrarToast('error', 'No se pudo obtener el clima de algunas ciudades', 5000)
-          marcarCargaCompleta(document.getElementById('contenedor-detalle'))
+            function () {},
+          );
+          mostrarToast('error', 'No se pudo obtener el clima de algunas ciudades', 5000);
+          marcarCargaCompleta(document.getElementById('contenedor-detalle'));
         }
-      })
+      });
   }
 }
 
 function consultarClimaEspecifico(ciudad) {
-  document.getElementById('city').value = ciudad
-  consultarClima()
+  document.getElementById('city').value = ciudad;
+  consultarClima();
 }
+

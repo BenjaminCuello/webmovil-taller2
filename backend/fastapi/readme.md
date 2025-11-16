@@ -1,6 +1,6 @@
 # API de Clima y Feriados (FastAPI)
 
-Este directorio contiene el backend de Python (FastAPI) que expone datos de clima y feriados consumidos desde una base de datos MongoDB (MongoDB Atlas). No se llaman APIs externas en tiempo de ejecuci��n; los datos se cargan desde archivos de seed locales.
+Este directorio contiene el backend de Python (FastAPI) que expone datos de clima y feriados consumidos desde una base de datos MongoDB (MongoDB Atlas). No se llaman APIs externas en tiempo de ejecución; los datos se cargan desde archivos de seed locales.
 
 ## Tech Stack
 
@@ -11,19 +11,19 @@ Este directorio contiene el backend de Python (FastAPI) que expone datos de clim
 
 ---
 
-## Ejecuci��n con Docker Compose (recomendada)
+## Ejecución con Docker Compose (recomendada)
 
-El servicio `fastapi` est�� integrado en el `docker-compose.yml` de la ra��z.
+El servicio `fastapi` está integrado en el `docker-compose.yml` de la raíz.
 
-1. Desde la ra��z del repositorio:
+1. Desde la raíz del repositorio:
    ```bash
    docker compose up --build
    ```
-2. La API quedar�� disponible en `http://localhost:8000`.
+2. La API quedará disponible en `http://localhost:8000`.
 
 ---
 
-## Ejecuci��n local
+## Ejecución local
 
 1. Crear y activar entorno virtual (opcional):
    ```bash
@@ -37,21 +37,23 @@ El servicio `fastapi` est�� integrado en el `docker-compose.yml` de la ra�
    ```bash
    pip install -r requirements.txt
    ```
-3. Configurar la cadena de conexi��n de MongoDB Atlas:
-   - Edita `CONNECTION_STRING` en `main.py` con tu URI de MongoDB Atlas.
+3. Configurar la cadena de conexión de MongoDB Atlas:
+   - Define la variable de entorno `MONGODB_URI` con tu URI de MongoDB Atlas.
+   - Si no defines `MONGODB_URI`, la API usará una cadena de conexión por defecto embebida en `main.py`.
+   - En el entorno Docker, `docker-compose.yml` ya define un valor de ejemplo para `MONGODB_URI`.
 4. Ejecutar el servidor:
    ```bash
    uvicorn main:app --reload
    ```
-   Servir�� en `http://127.0.0.1:8000`.
+   Servirá en `http://127.0.0.1:8000`.
 
-En el evento de `startup` la API sembrar�� autom��ticamente datos de `weather-seed.json` y `holidays-seed.json` si las colecciones est��n vac��as o incompletas.
+En el evento de `startup` la API sembrará automáticamente datos de `weather-seed.json` y `holidays-seed.json` si las colecciones están vacías o incompletas.
 
 ---
 
 ## API Endpoints
 
-La documentaci��n interactiva (Swagger) est�� en `http://localhost:8000/docs`.
+La documentación interactiva (Swagger) está en `http://localhost:8000/docs`.
 
 ### 1. GET /weather
 
@@ -80,14 +82,14 @@ Obtiene el clima cacheado para una ciudad.
 
 ### 2. GET /holidays/{countryCode}/{year}
 
-Obtiene los feriados para un pa��s y a��o.
+Obtiene los feriados para un país y año.
 
 - **URL:** `GET /holidays/{countryCode}/{year}`
 - **Ejemplo:** `GET http://localhost:8000/holidays/CL/2025`
 - **Ejemplo de respuesta (200 OK):**
   ```json
   [
-    { "date": "2025-01-01", "localName": "A��o Nuevo", "name": "A��o Nuevo" },
+    { "date": "2025-01-01", "localName": "Año Nuevo", "name": "Año Nuevo" },
     { "date": "2025-09-18", "localName": "Independencia Nacional", "name": "Independencia Nacional" }
   ]
   ```
