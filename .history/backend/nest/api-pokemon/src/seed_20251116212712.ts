@@ -18,15 +18,18 @@ async function bootstrap() {
     const service = app.get(PokemonService);
     const currentCount = await service.countAll();
     if (currentCount >= 30) {
+      // eslint-disable-next-line no-console
       console.log(
         `Ya existen ${currentCount} Pokémon en la base de datos. Seed omitido.`,
       );
     } else {
       const seeds = await readSeedsFromFile();
       await service.seed(seeds);
+      // eslint-disable-next-line no-console
       console.log('Seed data inserted successfully desde archivo local');
     }
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('Failed to seed data', error);
   } finally {
     await app.close();
