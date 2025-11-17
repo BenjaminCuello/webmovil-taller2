@@ -290,3 +290,127 @@ cordova build android
 - Frontend: consume las 3 APIs, diseño responsivo Mobile First con Tailwind, JS puro en `frontend/www/js/*`.
 - APK Android generado con Cordova (`cordova/`), probado en emulador; overlay de depuración desactivado por defecto.
 - Documentación: este README + `docs/backend-contracts.md` + READMEs por API incluyen instrucciones de instalación/ejecución y detalles técnicos.
+
+---
+
+## Inicio rápido (clonar, levantar y generar APK)
+
+### Prerrequisitos
+- Docker Desktop instalado y corriendo
+- Node.js (>=18) y npm
+- Cordova CLI (`npm install -g cordova`)
+- Java JDK (>=17) + Android SDK (adb en PATH)
+- Git
+
+### Pasos (Windows `cmd.exe`)
+```cmd
+git clone https://github.com/BenjaminCuello/webmovil-taller2.git
+cd webmovil-taller2
+docker compose up --build
+REM (esperar a que las 3 APIs estén arriba)
+npm run sync-www:cordova
+cd cordova
+cordova build android
+```
+APK generado: `cordova\platforms\android\app\build\outputs\apk\debug\app-debug.apk`
+
+Si la plataforma Android no estuviera agregada (primera vez):
+```cmd
+cordova platform add android
+cordova build android
+```
+
+---
+## Instalar y probar en BlueStacks
+
+1. Abrir BlueStacks y asegurarse de que esté iniciado.
+2. Conectar ADB (BlueStacks suele exponer `127.0.0.1:5555`):
+```cmd
+adb connect 127.0.0.1:5555
+adb devices
+```
+Debe verse un dispositivo listado (ej. `127.0.0.1:5555 device`).
+3. Instalar APK:
+```cmd
+adb install cordova\platforms\android\app\build\outputs\apk\debug\app-debug.apk
+```
+4. Abrir la app InfoMóvil en BlueStacks. Los datos deberían cargar desde las APIs locales usando `10.0.2.2` automáticamente.
+
+Si necesitas reinstalar (apk ya existe):
+```cmd
+adb install -r cordova\platforms\android\app\build\outputs\apk\debug\app-debug.apk
+```
+
+---
+## Ajustes rápidos de configuración dentro de la app
+
+Cambiar host de APIs (usar IP LAN del PC):
+```js
+localStorage.setItem('API_HOST', '192.168.X.Y')
+```
+Restaurar valor por defecto:
+```js
+localStorage.removeItem('API_HOST')
+```
+Activar overlay de depuración:
+```js
+localStorage.setItem('DEBUG_OVERLAY', '1')
+```
+Desactivar overlay:
+```js
+localStorage.removeItem('DEBUG_OVERLAY')
+```
+
+---
+## Salud de los servicios (verificación rápida)
+
+Después de `docker compose up --build`:
+- `http://localhost:3000/pokemon?limit=1`
+- `http://localhost:4000/countries?limit=1` (o simplemente `/countries`)
+- `http://localhost:8000/weather?city=Santiago`
+
+Respuestas 200 indican que el seed y conexiones funcionan.
+
+---
+## Preparación para entrega
+
+El repositorio contiene:
+- Código fuente de las 3 APIs y frontend empaquetable.
+- APK generable con los comandos anteriores.
+- README principal con pasos reproducibles.
+- Seeds y scripts idempotentes (`npm run seed`, ver Dockerfile Nest y FastAPI startup).
+
+Para generar una nueva versión antes de subir:
+```cmd
+git pull
+docker compose build
+npm run sync-www:cordova
+cd cordova
+cordova build android
+cd ..
+git add README.md
+git commit -m "docs: actualización final README entrega"
+git push origin main
+```
+
+Opcional: crear tag de entrega
+```cmd
+git tag -a v1.0-entrega -m "Entrega Taller 2"
+git push origin v1.0-entrega
+```
+
+---
+## Troubleshooting resumido
+
+| Problema | Causa probable | Solución |
+|----------|----------------|----------|
+| APK no instala | Falta SDK / adb | Instalar Android SDK y agregar `platform-tools` al PATH |
+| App sin datos | APIs caídas | Revisar contenedores: `docker compose ps` |
+| Error de red | Host incorrecto | Validar uso de `10.0.2.2` en emulador |
+| Sprites no cargan | Ruta errónea | Verificar carpeta `www/img/pokemon/` en Cordova |
+| Seed no aplica | Datos ya existen | Borrar tabla/colección o ajustar seed manualmente |
+
+---
+## Licencia / Uso
+
+Proyecto académico para Taller 2. No destinado a producción. Uso libre con fines educativos.
