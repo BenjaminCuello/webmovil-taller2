@@ -49,6 +49,7 @@
       }
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Cordova inyecta este archivo en Android; en navegador puede dar 404 sin afectar la app -->
     <script src="cordova.js"></script>
     <script>
       ;(function () {
@@ -133,6 +134,7 @@
       </section>
 
       <section class="tarjeta-grid grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-6">
+        <!-- Tarjeta: Pokémon -->
         <article class="tarjeta">
           <header class="flex items-center justify-between">
             <h3 class="text-lg font-semibold">Pokémon</h3>
@@ -155,6 +157,7 @@
           >
         </article>
 
+        <!-- Tarjeta: Países -->
         <article class="tarjeta">
           <header class="flex items-center justify-between">
             <h3 class="text-lg font-semibold">Países</h3>
@@ -177,6 +180,7 @@
           >
         </article>
 
+        <!-- Tarjeta: Clima -->
         <article class="tarjeta">
           <header class="flex items-center justify-between">
             <h3 class="text-lg font-semibold">Clima</h3>
@@ -195,6 +199,7 @@
           >
         </article>
 
+        <!-- Tarjeta: Feriados -->
         <article class="tarjeta">
           <header class="flex items-center justify-between">
             <h3 class="text-lg font-semibold">Feriados</h3>

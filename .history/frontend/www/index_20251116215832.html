@@ -49,20 +49,10 @@
       }
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Cordova inyecta este archivo en Android; en navegador puede dar 404 sin afectar la app -->
     <script src="cordova.js"></script>
     <script>
       ;(function () {
-        try {
-          var show = (localStorage && localStorage.getItem('DEBUG_OVERLAY')) === '1'
-        } catch (e) {
-          var show = false
-        }
-
-        if (!show) {
-          window.debugLog = function () {}
-          return
-        }
-
         var box
         function ensureBox() {
           if (box) return box
@@ -75,7 +65,6 @@
           })
           return box
         }
-
         window.debugLog = function (label, data) {
           try {
             var el = ensureBox()
@@ -84,7 +73,6 @@
             el.textContent += line + '\n'
           } catch (e) {}
         }
-
         window.addEventListener('error', function (evt) {
           window.debugLog('window.onerror', {
             message: evt.message,
@@ -133,50 +121,33 @@
       </section>
 
       <section class="tarjeta-grid grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-6">
+        <!-- Tarjeta: Pokémon -->
         <article class="tarjeta">
           <header class="flex items-center justify-between">
             <h3 class="text-lg font-semibold">Pokémon</h3>
             <span class="text-xs uppercase text-blue-600">API</span>
           </header>
           <p class="text-sm text-gray-600">Personajes destacados con imagen y número de Pokédex</p>
-          <div
-            id="contenedor-pokemon"
-            class="tarjeta-datos text-sm text-gray-600"
-            aria-live="polite"
-          >
+          <div id="contenedor-pokemon" class="tarjeta-datos text-sm text-gray-600" aria-live="polite">
             <p class="text-gray-400">Cargando...</p>
           </div>
-          <a
-            class="tarjeta-enlace ir-detalle"
-            data-recurso="pokemon"
-            href="#"
-            aria-label="Ver detalles de Pokémon"
-            >Ver más</a
-          >
+          <a class="tarjeta-enlace ir-detalle" data-recurso="pokemon" href="#" aria-label="Ver detalles de Pokémon">Ver más</a>
         </article>
 
+        <!-- Tarjeta: Países -->
         <article class="tarjeta">
           <header class="flex items-center justify-between">
             <h3 class="text-lg font-semibold">Países</h3>
             <span class="text-xs uppercase text-blue-600">API</span>
           </header>
           <p class="text-sm text-gray-600">Región, capital y población por país</p>
-          <div
-            id="contenedor-paises"
-            class="tarjeta-datos text-sm text-gray-600"
-            aria-live="polite"
-          >
+          <div id="contenedor-paises" class="tarjeta-datos text-sm text-gray-600" aria-live="polite">
             <p class="text-gray-400">Cargando...</p>
           </div>
-          <a
-            class="tarjeta-enlace ir-detalle"
-            data-recurso="paises"
-            href="#"
-            aria-label="Ver detalles de países"
-            >Ver más</a
-          >
+          <a class="tarjeta-enlace ir-detalle" data-recurso="paises" href="#" aria-label="Ver detalles de países">Ver más</a>
         </article>
 
+        <!-- Tarjeta: Clima -->
         <article class="tarjeta">
           <header class="flex items-center justify-between">
             <h3 class="text-lg font-semibold">Clima</h3>
@@ -186,35 +157,20 @@
           <div id="contenedor-clima" class="tarjeta-datos text-sm text-gray-600" aria-live="polite">
             <p class="text-gray-400">Cargando...</p>
           </div>
-          <a
-            class="tarjeta-enlace ir-detalle"
-            data-recurso="clima"
-            href="#"
-            aria-label="Ver detalles del clima"
-            >Ver más</a
-          >
+          <a class="tarjeta-enlace ir-detalle" data-recurso="clima" href="#" aria-label="Ver detalles del clima">Ver más</a>
         </article>
 
+        <!-- Tarjeta: Feriados -->
         <article class="tarjeta">
           <header class="flex items-center justify-between">
             <h3 class="text-lg font-semibold">Feriados</h3>
             <span class="text-xs uppercase text-blue-600">API</span>
           </header>
           <p class="text-sm text-gray-600">Listado de feriados oficiales por país y año</p>
-          <div
-            id="contenedor-feriados"
-            class="tarjeta-datos text-sm text-gray-600"
-            aria-live="polite"
-          >
+          <div id="contenedor-feriados" class="tarjeta-datos text-sm text-gray-600" aria-live="polite">
             <p class="text-gray-400">Cargando...</p>
           </div>
-          <a
-            class="tarjeta-enlace ir-detalle"
-            data-recurso="feriados"
-            href="#"
-            aria-label="Ver detalles de feriados"
-            >Ver más</a
-          >
+          <a class="tarjeta-enlace ir-detalle" data-recurso="feriados" href="#" aria-label="Ver detalles de feriados">Ver más</a>
         </article>
       </section>
     </main>

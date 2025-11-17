@@ -29,7 +29,6 @@ function _fetchJSON(url, options) {
     })
 }
 
-// POK�MON - API NestJS local
 function obtenerPokemon(nombreOId) {
   var url = BASE_URL_POKEMON.replace(/\/$/, '') + '/pokemon/' + encodeURIComponent(nombreOId)
   return _fetchJSON(url).catch(function (error) {
@@ -51,7 +50,6 @@ function obtenerListaPokemon(limite, desde) {
   })
 }
 
-// PA�SES - API Express local
 function obtenerPais(nombre) {
   var url =
     BASE_URL_COUNTRIES.replace(/\/$/, '') + '/countries/search?name=' + encodeURIComponent(nombre)
@@ -69,7 +67,6 @@ function obtenerTodosPaises() {
   })
 }
 
-// CLIMA - API FastAPI local
 function obtenerClima(ciudad) {
   var url = BASE_URL_FASTAPI.replace(/\/$/, '') + '/weather?city=' + encodeURIComponent(ciudad)
   return _fetchJSON(url).catch(function (error) {
@@ -78,7 +75,6 @@ function obtenerClima(ciudad) {
   })
 }
 
-// FERIADOS - API FastAPI local
 function obtenerFeriados(codigoPais, ano) {
   var url =
     BASE_URL_FASTAPI.replace(/\/$/, '') +

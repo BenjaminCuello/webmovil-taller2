@@ -56,3 +56,4 @@ Guía para testear el frontend consumiendo únicamente las APIs propias del Tall
 
 - El frontend siempre consume las APIs propias configuradas en `frontend/www/js/config.js`.
 - No se usan ya datos mock ni APIs públicas en tiempo de ejecución.
+
