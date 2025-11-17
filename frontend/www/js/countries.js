@@ -1,107 +1,107 @@
-var paisesPorPagina = 30;
-var paginaActualPaises = 0;
-var todosLosPaises = [];
+var paisesPorPagina = 30
+var paginaActualPaises = 0
+var todosLosPaises = []
 
 function abreviarRegion(region) {
-  var r = (region || '').toLowerCase();
-  if (r === 'americas') return 'Am';
-  if (r === 'europe') return 'Eu';
-  if (r === 'asia') return 'As';
-  if (r === 'africa') return 'Af';
-  if (r === 'oceania') return 'Oc';
-  return region || 'N/D';
+  var r = (region || '').toLowerCase()
+  if (r === 'americas') return 'Am'
+  if (r === 'europe') return 'Eu'
+  if (r === 'asia') return 'As'
+  if (r === 'africa') return 'Af'
+  if (r === 'oceania') return 'Oc'
+  return region || 'N/D'
 }
 
 function cargarPaisesLanding() {
-  var contenedor = document.getElementById('contenedor-paises');
-  if (!contenedor) return;
-  mostrarEstadoCarga(contenedor, 'Cargando países destacados...');
+  var contenedor = document.getElementById('contenedor-paises')
+  if (!contenedor) return
+  mostrarEstadoCarga(contenedor, 'Cargando países destacados...')
   obtenerTodosPaises()
     .then(function (listaPaises) {
       listaPaises.sort(function (a, b) {
-        return (b.population || 0) - (a.population || 0);
-      });
-      contenedor.innerHTML = '';
+        return (b.population || 0) - (a.population || 0)
+      })
+      contenedor.innerHTML = ''
       for (var i = 0; i < 6 && i < listaPaises.length; i++) {
-        var pais = listaPaises[i];
-        var flag = (pais.flags && (pais.flags.png || pais.flags.svg)) || '';
-        var nombre = (pais.name && pais.name.common) || '-';
-        var region = abreviarRegion(pais.region);
+        var pais = listaPaises[i]
+        var flag = (pais.flags && (pais.flags.png || pais.flags.svg)) || ''
+        var nombre = (pais.name && pais.name.common) || '-'
+        var region = abreviarRegion(pais.region)
         var html =
           '<div class="flex items-center gap-2">' +
           '<img src="' +
           flag +
-          '" alt="Bandera" class="w-6 h-4 object-cover rounded" />' +
+          '" alt="Bandera" class="w-6 h-4 object-cover rounded" onerror="if(this.src.endsWith(\'.png\')){this.src=this.src.replace(/.png$/,\'.svg\')}" />' +
           '<strong>' +
           nombre +
           '</strong>' +
           '</div>' +
           '<span class="text-xs text-gray-600">' +
           region +
-          '</span>';
-        contenedor.appendChild(crearTarjetaPequena(html));
+          '</span>'
+        contenedor.appendChild(crearTarjetaPequena(html))
       }
-      marcarCargaCompleta(contenedor);
+      marcarCargaCompleta(contenedor)
     })
     .catch(function () {
-      mostrarError(contenedor, 'No se pudieron cargar los países destacados');
-    });
+      mostrarError(contenedor, 'No se pudieron cargar los países destacados')
+    })
 }
 
 function buscarPais() {
-  var input = document.getElementById('country-q');
-  var status = document.getElementById('country-status');
-  var contenedor = document.getElementById('contenedor-detalle');
+  var input = document.getElementById('country-q')
+  var status = document.getElementById('country-status')
+  var contenedor = document.getElementById('contenedor-detalle')
 
-  var consultaTexto = (input.value || '').trim();
+  var consultaTexto = (input.value || '').trim()
   if (!consultaTexto) {
-    status.textContent = 'Por favor ingresa el nombre de un país';
-    return;
+    status.textContent = 'Por favor ingresa el nombre de un país'
+    return
   }
 
-  var consultaNormalizada = normalizarTextoBusquedas(consultaTexto);
-  status.textContent = 'Buscando...';
-  mostrarEstadoCarga(contenedor);
+  var consultaNormalizada = normalizarTextoBusquedas(consultaTexto)
+  status.textContent = 'Buscando...'
+  mostrarEstadoCarga(contenedor)
 
   var promesaLista =
     Array.isArray(todosLosPaises) && todosLosPaises.length
       ? Promise.resolve(todosLosPaises)
-      : obtenerTodosPaises();
+      : obtenerTodosPaises()
 
   promesaLista
     .then(function (listaPaises) {
       if (!Array.isArray(listaPaises) || !listaPaises.length) {
-        status.textContent = 'No encontramos resultados para tu búsqueda';
-        mostrarError(contenedor);
-        return;
+        status.textContent = 'No encontramos resultados para tu búsqueda'
+        mostrarError(contenedor)
+        return
       }
 
-      todosLosPaises = listaPaises;
+      todosLosPaises = listaPaises
 
-      var paisEncontrado = null;
+      var paisEncontrado = null
       for (var i = 0; i < listaPaises.length; i++) {
-        var nombre = (listaPaises[i].name && listaPaises[i].name.common) || '';
+        var nombre = (listaPaises[i].name && listaPaises[i].name.common) || ''
         if (normalizarTextoBusquedas(nombre).indexOf(consultaNormalizada) !== -1) {
-          paisEncontrado = listaPaises[i];
-          break;
+          paisEncontrado = listaPaises[i]
+          break
         }
       }
 
       if (!paisEncontrado) {
-        status.textContent = 'No encontramos resultados para tu búsqueda';
-        mostrarError(contenedor);
-        return;
+        status.textContent = 'No encontramos resultados para tu búsqueda'
+        mostrarError(contenedor)
+        return
       }
 
-      var pais = paisEncontrado;
-      status.textContent = 'País encontrado: ' + pais.name.common;
+      var pais = paisEncontrado
+      status.textContent = 'País encontrado: ' + pais.name.common
       var nombreOficial =
         pais.name.official !== pais.name.common
           ? '<p class="text-gray-600">' + pais.name.official + '</p>'
-          : '';
-      var capital = pais.capital ? pais.capital.join(', ') : 'No disponible';
-      var flag = (pais.flags && (pais.flags.png || pais.flags.svg)) || '';
-      var region = abreviarRegion(pais.region);
+          : ''
+      var capital = pais.capital ? pais.capital.join(', ') : 'No disponible'
+      var flag = (pais.flags && (pais.flags.png || pais.flags.svg)) || ''
+      var region = abreviarRegion(pais.region)
       contenedor.innerHTML =
         '<div class="grid grid-cols-1 md:grid-cols-2 gap-6">' +
         '<div class="text-center">' +
@@ -109,7 +109,7 @@ function buscarPais() {
         flag +
         '" alt="Bandera de ' +
         pais.name.common +
-        '" class="w-64 h-auto mx-auto rounded-lg shadow-lg">' +
+        '" class="w-64 h-auto mx-auto rounded-lg shadow-lg" onerror="if(this.src.endsWith(\'.png\')){this.src=this.src.replace(/.png$/,\'.svg\')}" />' +
         '</div>' +
         '<div class="space-y-4">' +
         '<div>' +
@@ -145,37 +145,37 @@ function buscarPais() {
         '</p>' +
         '</div>' +
         '</div>' +
-        '</div>';
-      marcarCargaCompleta(contenedor);
+        '</div>'
+      marcarCargaCompleta(contenedor)
     })
     .catch(function () {
-      status.textContent = 'No se pudo cargar la lista de países';
-      mostrarError(contenedor, 'No se pudieron cargar los países destacados');
-    });
+      status.textContent = 'No se pudo cargar la lista de países'
+      mostrarError(contenedor, 'No se pudieron cargar los países destacados')
+    })
 }
 
 function mostrarTodosPaises() {
-  paginaActualPaises = 0;
-  var contenedor = document.getElementById('contenedor-detalle');
-  mostrarEstadoCarga(contenedor, 'Cargando países...');
+  paginaActualPaises = 0
+  var contenedor = document.getElementById('contenedor-detalle')
+  mostrarEstadoCarga(contenedor, 'Cargando países...')
   obtenerTodosPaises()
     .then(function (listaPaises) {
       listaPaises.sort(function (a, b) {
-        return a.name.common.localeCompare(b.name.common);
-      });
-      todosLosPaises = listaPaises;
-      cargarPaginaPaises(true);
+        return a.name.common.localeCompare(b.name.common)
+      })
+      todosLosPaises = listaPaises
+      cargarPaginaPaises(true)
     })
     .catch(function () {
-      mostrarError(contenedor, 'Error al cargar los países');
-    });
+      mostrarError(contenedor, 'Error al cargar los países')
+    })
 }
 
 function cargarPaginaPaises(esNuevo) {
-  var contenedor = document.getElementById('contenedor-detalle');
-  var inicio = paginaActualPaises * paisesPorPagina;
-  var fin = inicio + paisesPorPagina;
-  var paisesPagina = todosLosPaises.slice(inicio, fin);
+  var contenedor = document.getElementById('contenedor-detalle')
+  var inicio = paginaActualPaises * paisesPorPagina
+  var fin = inicio + paisesPorPagina
+  var paisesPagina = todosLosPaises.slice(inicio, fin)
   if (esNuevo) {
     contenedor.innerHTML =
       '<h3 class="text-xl font-bold mb-4">Países (mostrando ' +
@@ -185,49 +185,49 @@ function cargarPaginaPaises(esNuevo) {
       ' de ' +
       todosLosPaises.length +
       '):</h3>' +
-      '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="paises-grid"></div>';
+      '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="paises-grid"></div>'
     if (fin < todosLosPaises.length) {
       contenedor.innerHTML +=
-        '<div class="text-center mt-6"><button id="cargar-mas-paises" class="px-4 py-2 bg-green-600 text-white rounded">Cargar más países</button></div>';
+        '<div class="text-center mt-6"><button id="cargar-mas-paises" class="px-4 py-2 bg-green-600 text-white rounded">Cargar más países</button></div>'
     }
   }
-  var grid = document.getElementById('paises-grid');
-  if (!grid) return;
+  var grid = document.getElementById('paises-grid')
+  if (!grid) return
   for (var i = 0; i < paisesPagina.length; i++) {
-    var pais = paisesPagina[i];
-    var flag = (pais.flags && (pais.flags.png || pais.flags.svg)) || '';
-    var nombre = (pais.name && pais.name.common) || '-';
-    var region = abreviarRegion(pais.region);
+    var pais = paisesPagina[i]
+    var flag = (pais.flags && (pais.flags.png || pais.flags.svg)) || ''
+    var nombre = (pais.name && pais.name.common) || '-'
+    var region = abreviarRegion(pais.region)
     var contenidoHtml =
       '<img src="' +
       flag +
-      '" alt="Bandera" class="w-16 h-12 mx-auto object-cover rounded">' +
+      '" alt="Bandera" class="w-16 h-12 mx-auto object-cover rounded" onerror="if(this.src.endsWith(\'.png\')){this.src=this.src.replace(/.png$/,\'.svg\')}" />' +
       '<h4 class="font-bold mt-2">' +
       nombre +
       '</h4>' +
       '<p class="text-gray-600 text-sm">' +
       region +
-      '</p>';
+      '</p>'
     var tarjeta = crearTarjetaConBoton(
       contenidoHtml,
       'border rounded p-4 text-center',
       'Ver detalles',
       (function (n) {
         return function () {
-          buscarPaisEspecifico(n);
-        };
-      })(nombre),
-    );
-    grid.appendChild(tarjeta);
+          buscarPaisEspecifico(n)
+        }
+      })(nombre)
+    )
+    grid.appendChild(tarjeta)
   }
-  marcarCargaCompleta(contenedor);
-  var botonCargar = document.getElementById('cargar-mas-paises');
+  marcarCargaCompleta(contenedor)
+  var botonCargar = document.getElementById('cargar-mas-paises')
   if (botonCargar) {
     botonCargar.onclick = function () {
-      paginaActualPaises++;
-      var nuevoInicio = paginaActualPaises * paisesPorPagina;
-      var nuevoFin = nuevoInicio + paisesPorPagina;
-      var titulo = contenedor.querySelector('h3');
+      paginaActualPaises++
+      var nuevoInicio = paginaActualPaises * paisesPorPagina
+      var nuevoFin = nuevoInicio + paisesPorPagina
+      var titulo = contenedor.querySelector('h3')
       if (titulo) {
         titulo.textContent =
           'Países (mostrando ' +
@@ -236,18 +236,17 @@ function cargarPaginaPaises(esNuevo) {
           Math.min(nuevoFin, todosLosPaises.length) +
           ' de ' +
           todosLosPaises.length +
-          '):';
+          '):'
       }
-      cargarPaginaPaises(false);
+      cargarPaginaPaises(false)
       if (nuevoFin >= todosLosPaises.length) {
-        botonCargar.style.display = 'none';
+        botonCargar.style.display = 'none'
       }
-    };
+    }
   }
 }
 
 function buscarPaisEspecifico(nombre) {
-  document.getElementById('country-q').value = nombre;
-  buscarPais();
+  document.getElementById('country-q').value = nombre
+  buscarPais()
 }
-
